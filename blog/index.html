@@ -950,7 +950,7 @@ Headers:
   if(openBtn && modal) {
     openBtn.addEventListener('click', () => {
       modal.classList.add('modal-open');
-      document.body.style.overflow = 'hidden'; // Stop background scroll
+      document.body.style.overflow = 'hidden';
     });
   }
   if(closeModalBtn && modal) {
@@ -969,8 +969,8 @@ async function loadPosts() {
   if (!grid) return;
 
   try {
-    // 1. Physically pull the live article catalog file
-    const res = await fetch('posts.json');
+    // Uses a dot-relative link to ensure it fetches from the blog directory
+    const res = await fetch('./posts.json');
     if (!res.ok) throw new Error("Could not find posts.json directory file.");
     
     const posts = await res.json();
@@ -978,7 +978,7 @@ async function loadPosts() {
     // Sort newest first
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // 2. Generate cards. NOTICE the href points to article.html instead of the raw file
+    // Dynamic grid generation pointing to the layout template wrapper
     grid.innerHTML = posts.map(post => `
       <article class="blog-card reveal" data-category="${post.category}"
                data-title="${post.title}" data-excerpt="${post.excerpt}">
@@ -1001,7 +1001,7 @@ async function loadPosts() {
       </div>
     `;
 
-    // Trigger Scroll Reveal on dynamically added items
+    // Re-bind scroll reveal observation loops to newly generated cards
     if (window.IntersectionObserver) {
       const observer = new IntersectionObserver(entries => {
         entries.forEach((entry, i) => {
@@ -1014,7 +1014,7 @@ async function loadPosts() {
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
 
-    // Initialize search and filter logic now that cards are attached to DOM
+    // Pass runtime execution over to the user interaction filters
     initFilters();
 
   } catch (error) {
@@ -1080,7 +1080,6 @@ function initFilters() {
 }
 
 document.addEventListener('DOMContentLoaded', loadPosts);
-
 </script>
 </body>
 </html>

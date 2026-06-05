@@ -1,0 +1,76 @@
+[ 
+
+  {
+    "slug": "understanding-apis",
+    "title": "Understanding APIs: The Invisible Infrastructure Powering the Modern Web",
+    "excerpt": "A deep dive into how APIs handle digital infrastructure, exploring core REST, GraphQL architectures, and security layer constraints.",
+    "date": "2026-06-05",
+    "category": "Cloud",
+    "readTime": "8 min read"
+  },
+  
+  {
+    "slug": "git-github-mastery",
+    "title": "Git and GitHub Mastery: From Commits to Collaborative Workflows",
+    "excerpt": "Master local version control mechanics, branching strategies, conflict resolution, and collaborative features like Pull Requests and GitHub Actions pipelines.",
+    "date": "2026-06-01",
+    "category": "Git",
+    "readTime": "7 min read"
+  },
+  {
+    "slug": "data-drives-business",
+    "title": "How Data Drives Business Decisions: Analytics in the Modern Era",
+    "excerpt": "Exploring the real-world frameworks of transforming raw data schemas into actionable metrics, predictive analytics, and clear commercial strategies.",
+    "date": "2026-05-25",
+    "category": "Data",
+    "readTime": "6 min read"
+  },
+  {
+    "slug": "portfolio-websites-cs-it",
+    "title": "Portfolio Websites for CS and IT Graduates: Engineering Your Brand",
+    "excerpt": "A deep blueprint outlining how to design, optimize, and build technical portfolios that showcase projects effectively and capture tech hiring managers.",
+    "date": "2026-05-18",
+    "category": "Careers",
+    "readTime": "5 min read"
+  },
+  {
+    "slug": "sentiment-analysis-deep-dive",
+    "title": "Sentiment Analysis: A Deep Dive into Natural Language Processing",
+    "excerpt": "An analytical breakdown of training machine learning models to classify textual data, handle linguistic nuances, and extract emotional context at scale.",
+    "date": "2026-05-12",
+    "category": "Data",
+    "readTime": "9 min read"
+  },
+  {
+    "slug": "cicd-github-actions",
+    "title": "Automating Development: Building CI/CD Pipelines with GitHub Actions",
+    "excerpt": "Eliminate manual builds. Learn to architect continuous integration and delivery loops that test code quality and deploy code artifacts automatically on every push.",
+    "date": "2026-05-05",
+    "category": "Git",
+    "readTime": "8 min read"
+  },
+  {
+    "slug": "africa-focused-tech-products",
+    "title": "The Case for Africa-Focused Tech Products: Solving Local Challenges",
+    "excerpt": "Why copying Western software models fails, and how building tailored digital solutions for infrastructure, logistics, and localized ecosystems unlocks massive economic potential.",
+    "date": "2026-04-28",
+    "category": "Tech Strategy",
+    "readTime": "7 min read"
+  },
+  {
+    "slug": "relational-vs-nosql",
+    "title": "SQL vs NoSQL: Architecting Data Models That Scale Efficiently",
+    "excerpt": "Demystifying relational schema design versus document-based key-value models, exploring ACID compliance rules and horizontal scalability constraints.",
+    "date": "2026-04-12",
+    "category": "Database",
+    "readTime": "7 min read"
+  },
+  {
+    "slug": "full-stack-roadmap",
+    "title": "The Full-Stack Blueprint: Transitioning to Modular Web Application Design",
+    "excerpt": "Breaking down modern framework ecosystems, server components, standardizing asynchronous REST requests, and wireframe engineering strategies.",
+    "date": "2026-04-05",
+    "category": "Web Dev",
+    "readTime": "10 min read"
+  }
+]

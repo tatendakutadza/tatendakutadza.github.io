@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- SEO Optimization -->
+<title>Blog | Tatenda J. Kutadza</title>
+<meta name="description" content="Deep dive into APIs (Application Programming Interfaces), REST vs GraphQL architectures, software engineering frameworks, and career roadmaps by Tatenda J. Kutadza.">
+<meta name="keywords" content="APIs explained, Application Programming Interface, REST API, GraphQL vs REST, Git and GitHub mastery, Data Driven Decisions, Portfolio website template IT, Tatenda Kutadza, Zimbabwe Tech">
+<meta name="author" content="Tatenda J. Kutadza">
+<link rel="canonical" href="https://tatendakutadza.dev/blog.html">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://tatendakutadza.dev/blog.html">
+<meta property="og:title" content="APIs Explained &amp; Tech Insights | Tatenda J. Kutadza">
+<meta property="og:description" content="Demystifying Application Programming Interfaces and modern engineering patterns.">
+<meta property="og:image" content="https://tatendakutadza.dev/assets/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+
+<!-- Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Blog",
+  "name": "TJK Engineering Log",
+  "url": "https://tatendakutadza.dev/blog.html",
+  "author": {
+    "@type": "Person",
+    "name": "Tatenda J. Kutadza",
+    "url": "https://tatendakutadza.dev"
+  }
+}
+</script>
+
+<meta name="theme-color" content="#0a0e1a">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:ital,wght@0,300;0,400;0,500;1,400&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<!-- Theme script -->
+<script>
+(function() {
+  const saved = localStorage.getItem('tjk-theme');
+  if (saved) document.documentElement.setAttribute('data-theme', saved);
+})();
+</script>
+
+<style>
+/* ══════════════════════════════════════════
+   VARIABLES
+══════════════════════════════════════════ */
+:root {
+  --bg: #0a0e1a;
+  --bg2: #0e1524;
+  --surface: #111827;
+  --surface2: #1a2236;
+  --border: #1e2d47;
+  --border2: #243555;
+  --text: #e8edf5;
+  --text2: #b0bfd6;
+  --muted: #6b7fa0;
+  --accent: #38bdf8;
+  --accent2: #f97316;
+  --accent3: #a78bfa;
+  --accent-glow: rgba(56,189,248,0.18);
+  --success: #4ade80;
+  --card-shadow: 0 4px 24px rgba(0,0,0,0.4);
+  --nav-bg: rgba(10,14,26,0.88);
+  --font-display: 'Syne', sans-serif;
+  --font-body: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme="light"] {
+  --bg: #f4f7fc;
+  --bg2: #edf1fa;
+  --surface: #ffffff;
+  --surface2: #f0f4fb;
+  --border: #d4dff0;
+  --border2: #c0cfe8;
+  --text: #0f1a2e;
+  --text2: #334466;
+  --muted: #6b7fa0;
+  --accent: #0284c7;
+  --accent2: #ea580c;
+  --accent3: #7c3aed;
+  --accent-glow: rgba(2,132,199,0.12);
+  --card-shadow: 0 4px 24px rgba(0,0,0,0.08);
+  --nav-bg: rgba(244,247,252,0.9);
+}
+
+/* ══════════════════════════════════════════
+   RESET & BASE
+══════════════════════════════════════════ */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.7;
+  min-height: 100vh;
+  transition: background 0.35s ease, color 0.35s ease;
+  cursor: none;
+  overflow-x: hidden;
+}
+a { color: inherit; text-decoration: none; cursor: none; }
+button { cursor: none; border: none; background: none; }
+img, svg { display: block; max-width: 100%; }
+input { font-family: var(--font-body); }
+
+/* ══════════════════════════════════════════
+   CUSTOM CURSOR
+══════════════════════════════════════════ */
+.cursor-dot {
+  position: fixed; z-index: 9999; pointer-events: none;
+  width: 10px; height: 10px;
+  background: var(--accent); border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: transform 0.1s ease, background 0.2s;
+}
+.cursor-ring {
+  position: fixed; z-index: 9998; pointer-events: none;
+  width: 36px; height: 36px;
+  border: 1.5px solid var(--accent); border-radius: 50%;
+  transform: translate(-50%,-50%);
+  transition: width 0.25s, height 0.25s, border-color 0.25s, opacity 0.25s;
+  opacity: 0.6;
+}
+.cursor-ring.hovered { width: 56px; height: 56px; opacity: 0.4; border-color: var(--accent2); }
+
+/* ══════════════════════════════════════════
+   CANVAS BACKGROUND
+══════════════════════════════════════════ */
+#bgCanvas {
+  position: fixed; inset: 0;
+  z-index: -1; pointer-events: none;
+  opacity: 0.6;
+}
+
+/* ══════════════════════════════════════════
+   NAV
+══════════════════════════════════════════ */
+#mainNav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--nav-bg);
+  backdrop-filter: blur(14px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s, border-color 0.3s, box-shadow 0.3s;
+}
+#mainNav.scrolled { box-shadow: 0 4px 32px rgba(0,0,0,0.3); }
+
+.nav-inner {
+  max-width: 1280px; margin: 0 auto;
+  padding: 0 2rem; height: 64px;
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem; font-weight: 800;
+  color: var(--text); letter-spacing: -1px;
+}
+.nav-logo span { color: var(--accent); }
+
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-link {
+  font-size: 0.85rem; font-weight: 500;
+  color: var(--muted); letter-spacing: 0.04em;
+  position: relative; padding: 4px 0;
+  transition: color 0.2s;
+}
+.nav-link::after {
+  content: ''; position: absolute; bottom: -2px; left: 0;
+  width: 0; height: 2px; background: var(--accent);
+  transition: width 0.3s ease; border-radius: 2px;
+}
+.nav-link:hover { color: var(--text); }
+.nav-link:hover::after { width: 100%; }
+.nav-link.active { color: var(--text); }
+.nav-link.active::after { width: 100%; }
+
+.nav-right { display: flex; align-items: center; gap: 1rem; }
+
+.nav-status {
+  display: flex; align-items: center; gap: 6px;
+  font-size: 0.75rem; color: var(--muted);
+  padding: 5px 10px;
+  border: 1px solid var(--border); border-radius: 999px;
+  background: var(--surface);
+}
+.status-dot {
+  width: 7px; height: 7px;
+  background: var(--success); border-radius: 50%;
+  animation: statusPulse 2s infinite;
+}
+@keyframes statusPulse {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%      { opacity:0.4; transform:scale(0.7); }
+}
+.status-text { font-family: var(--font-mono); }
+
+.theme-toggle {
+  background: var(--surface); border: 1px solid var(--border) !important;
+  border-radius: 8px; padding: 7px;
+  color: var(--muted); transition: color 0.2s, border-color 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.theme-toggle:hover { color: var(--accent); border-color: var(--accent) !important; }
+.theme-toggle svg { width: 16px; height: 16px; }
+[data-theme="dark"] .icon-sun  { display: none; }
+[data-theme="dark"] .icon-moon { display: block; }
+[data-theme="light"] .icon-moon { display: none; }
+[data-theme="light"] .icon-sun  { display: block; }
+
+.nav-burger {
+  display: none; flex-direction: column; gap: 5px; padding: 4px;
+}
+.nav-burger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text); border-radius: 2px; transition: all 0.3s;
+}
+
+/* ══════════════════════════════════════════
+   MOBILE DRAWER
+══════════════════════════════════════════ */
+.mobile-drawer {
+  position: fixed; top: 0; right: -100%; width: min(340px, 90vw);
+  height: 100vh; z-index: 300;
+  background: var(--surface); border-left: 1px solid var(--border);
+  padding: 5rem 2.5rem 2.5rem;
+  transition: right 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+.mobile-drawer.open { right: 0; }
+.mobile-drawer ul { list-style: none; display: flex; flex-direction: column; }
+.drawer-link {
+  display: block; padding: 1.1rem 0;
+  font-size: 1.4rem; font-family: var(--font-display); font-weight: 700;
+  color: var(--text2); border-bottom: 1px solid var(--border);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.drawer-link:hover { color: var(--accent); padding-left: 8px; }
+.drawer-close {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: var(--surface2) !important; border: 1px solid var(--border) !important;
+  color: var(--muted); border-radius: 8px;
+  width: 36px; height: 36px; font-size: 1rem; transition: color 0.2s;
+}
+.drawer-close:hover { color: var(--accent); }
+.drawer-overlay {
+  position: fixed; inset: 0; z-index: 250;
+  background: rgba(0,0,0,0.5); backdrop-filter: blur(4px);
+  opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.drawer-overlay.open { opacity: 1; pointer-events: all; }
+
+/* ══════════════════════════════════════════
+   BLOG HERO / HEADER
+══════════════════════════════════════════ */
+.blog-hero {
+  padding: 10rem 2rem 5rem;
+}
+.blog-hero-inner { max-width: 1280px; margin: 0 auto; }
+
+.blog-hero-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--muted); margin-bottom: 1.5rem;
+}
+.eyebrow-line { width: 32px; height: 1px; background: var(--muted); flex-shrink: 0; }
+
+.blog-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3rem, 5.5vw, 5rem);
+  font-weight: 800; line-height: 0.95;
+  letter-spacing: -3px; margin-bottom: 1.5rem;
+  color: var(--text);
+}
+.blog-hero-title em { font-style: italic; color: var(--accent); }
+
+.blog-hero-sub {
+  font-size: 1.05rem; color: var(--text2);
+  max-width: 560px; line-height: 1.75; margin-bottom: 2.5rem;
+}
+
+.blog-stats {
+  display: flex; align-items: center; gap: 1.5rem;
+  padding: 1.1rem 1.5rem;
+  background: var(--surface);
+  border: 1px solid var(--border); border-radius: 12px;
+  max-width: 440px;
+}
+.bs-item { text-align: center; flex: 1; }
+.bs-num {
+  font-family: var(--font-display);
+  font-size: 1.7rem; font-weight: 800;
+  color: var(--accent); line-height: 1; display: block;
+}
+.bs-label { font-size: 0.68rem; color: var(--muted); letter-spacing: 0.05em; margin-top: 2px; }
+.bs-sep { width: 1px; height: 32px; background: var(--border); flex-shrink: 0; }
+
+/* ══════════════════════════════════════════
+   CONTROLS PANEL
+══════════════════════════════════════════ */
+.controls-section {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  padding: 1.75rem 2rem;
+  position: sticky; top: 64px; z-index: 100;
+  backdrop-filter: blur(12px);
+}
+.controls-inner {
+  max-width: 1280px; margin: 0 auto;
+  display: flex; align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem; flex-wrap: wrap;
+}
+
+.search-wrapper { position: relative; flex: 1; max-width: 380px; min-width: 200px; }
+.search-icon {
+  position: absolute; left: 14px; top: 50%;
+  transform: translateY(-50%); color: var(--muted); font-size: 0.85rem;
+  pointer-events: none;
+}
+.search-input {
+  width: 100%; padding: 10px 14px 10px 38px;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 9px; color: var(--text);
+  font-family: var(--font-body); font-size: 0.88rem;
+  transition: border-color 0.2s, box-shadow 0.2s;
+  outline: none;
+}
+.search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-glow);
+}
+.search-input::placeholder { color: var(--muted); }
+
+.filter-bar { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter-btn {
+  font-family: var(--font-mono); font-size: 0.72rem;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 7px 15px; border-radius: 8px;
+  border: 1px solid var(--border) !important;
+  background: var(--surface); color: var(--muted);
+  transition: all 0.2s;
+}
+.filter-btn:hover { color: var(--accent); border-color: var(--accent) !important; }
+.filter-btn.active {
+  background: var(--accent); color: #0a0e1a;
+  border-color: var(--accent) !important; font-weight: 700;
+}
+
+.results-count {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  color: var(--muted); white-space: nowrap;
+}
+.results-count span { color: var(--accent); font-weight: 600; }
+
+/* ══════════════════════════════════════════
+   BLOG GRID & CARDS
+══════════════════════════════════════════ */
+.blog-content {
+  max-width: 1280px; margin: 0 auto;
+  padding: 4rem 2rem 8rem;
+}
+
+.reveal {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity 0.7s cubic-bezier(0.16,1,0.3,1),
+              transform 0.7s cubic-bezier(0.16,1,0.3,1);
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+.blog-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.75rem; }
+
+/* Featured card */
+.blog-card-featured {
+  grid-column: span 2;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2.5rem;
+  display: grid; grid-template-columns: 1fr auto;
+  gap: 2rem; align-items: start;
+  transition: border-color 0.3s, transform 0.2s;
+  position: relative; overflow: hidden;
+}
+.blog-card-featured::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+}
+.blog-card-featured:hover { border-color: var(--accent); transform: translateY(-3px); }
+
+/* Regular card */
+.blog-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  display: flex; flex-direction: column; gap: 1rem;
+  transition: border-color 0.2s, transform 0.2s;
+  position: relative;
+}
+.blog-card:hover { border-color: var(--accent); transform: translateY(-3px); }
+.blog-card:hover .blog-arrow { transform: translate(3px,-3px); }
+
+/* Card components */
+.blog-meta { display: flex; justify-content: space-between; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+.blog-tag {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  padding: 3px 9px; border-radius: 5px;
+  background: var(--accent-glow); color: var(--accent);
+  border: 1px solid rgba(56,189,248,0.25); letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+.blog-tag.devops   { background: rgba(167,139,250,0.1); color: var(--accent3); border-color: rgba(167,139,250,0.25); }
+.blog-tag.biz      { background: rgba(249,115,22,0.1); color: var(--accent2); border-color: rgba(249,115,22,0.25); }
+.blog-tag.edu      { background: rgba(74,222,128,0.1); color: var(--success); border-color: rgba(74,222,128,0.25); }
+
+.blog-date { font-size: 0.72rem; color: var(--muted); font-family: var(--font-mono); }
+.blog-featured-label {
+  font-family: var(--font-mono); font-size: 0.68rem;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 1rem;
+}
+
+.blog-title {
+  font-family: var(--font-display); font-size: 1.2rem;
+  font-weight: 700; line-height: 1.25; letter-spacing: -0.3px;
+}
+.blog-title-lg {
+  font-family: var(--font-display); font-size: 1.7rem;
+  font-weight: 800; line-height: 1.1; letter-spacing: -0.8px;
+  margin-bottom: 0.75rem;
+}
+
+.blog-excerpt { font-size: 0.88rem; color: var(--text2); line-height: 1.75; flex: 1; }
+.blog-excerpt-lg { font-size: 0.95rem; color: var(--text2); line-height: 1.8; }
+
+.blog-arrow {
+  display: inline-flex; align-items: center; gap: 6px;
+  font-size: 0.78rem; font-family: var(--font-mono);
+  letter-spacing: 0.06em; text-transform: uppercase;
+  color: var(--accent); margin-top: auto;
+  transition: transform 0.2s;
+}
+.blog-arrow:hover { text-decoration: underline; }
+
+.blog-footer {
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 8px; margin-top: auto; padding-top: 0.75rem;
+  border-top: 1px solid var(--border);
+}
+.read-time { font-size: 0.72rem; color: var(--muted); font-family: var(--font-mono); }
+
+.featured-visual {
+  width: 180px; flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+}
+.featured-visual svg { width: 100%; height: auto; opacity: 0.8; }
+
+.blog-empty {
+  grid-column: 1 / -1; text-align: center; padding: 5rem 2rem; color: var(--muted);
+}
+.blog-empty i { font-size: 2.5rem; margin-bottom: 1rem; color: var(--border2); }
+.blog-empty h3 { font-family: var(--font-display); font-size: 1.2rem; margin-bottom: 0.5rem; color: var(--text2); }
+
+.card-hidden { display: none !important; }
+
+/* ══════════════════════════════════════════
+   ARTICLE READING MODAL (SEO & UX Optimization)
+══════════════════════════════════════════ */
+.article-modal {
+  position: fixed; inset: 0; z-index: 1000;
+  display: none; align-items: center; justify-content: center;
+  padding: 2rem; background: rgba(5, 7, 13, 0.9);
+  backdrop-filter: blur(16px);
+}
+.article-modal.modal-open { display: flex; }
+.modal-content-wrapper {
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: 16px; width: 100%; max-width: 840px;
+  max-height: 85vh; overflow-y: auto; position: relative;
+  box-shadow: var(--card-shadow); animation: modalFadeUp 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes modalFadeUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.modal-close-btn {
+  position: absolute; top: 1.5rem; right: 1.5rem;
+  background: var(--surface2); border: 1px solid var(--border);
+  color: var(--text); border-radius: 50%; width: 40px; height: 40px;
+  display: flex; align-items: center; justify-content: center; font-size: 1.2rem;
+  transition: all 0.2s; z-index: 10;
+}
+.modal-close-btn:hover { border-color: var(--accent); color: var(--accent); transform: scale(1.05); }
+.modal-body { padding: 3.5rem; }
+.modal-body h1 { font-family: var(--font-display); font-size: 2.5rem; line-height: 1.1; margin-bottom: 1rem; color: var(--text); }
+.modal-body h2 { font-family: var(--font-display); font-size: 1.6rem; margin: 2rem 0 1rem; color: var(--accent); }
+.modal-body h3 { font-family: var(--font-display); font-size: 1.25rem; margin: 1.5rem 0 0.75rem; color: var(--accent3); }
+.modal-body p { margin-bottom: 1.5rem; color: var(--text2); font-size: 1.05rem; line-height: 1.8; }
+.modal-body hr { border: none; border-top: 1px solid var(--border); margin: 2.5rem 0; }
+.modal-body ul { margin: 0 0 1.5rem 1.5rem; color: var(--text2); }
+.modal-body li { margin-bottom: 0.5rem; }
+.modal-body strong { color: var(--text); font-weight: 600; }
+.modal-body code { font-family: var(--font-mono); font-size: 0.9rem; background: var(--surface2); padding: 2px 6px; border-radius: 4px; color: var(--accent); }
+.modal-body pre { background: var(--bg); border: 1px solid var(--border); padding: 1.25rem; border-radius: 8px; overflow-x: auto; margin-bottom: 1.5rem; }
+.modal-body pre code { background: none; padding: 0; color: var(--text2); font-size: 0.85rem; }
+
+/* ══════════════════════════════════════════
+   NEWSLETTER CALLOUT
+══════════════════════════════════════════ */
+.newsletter-section { background: var(--bg2); border-top: 1px solid var(--border); padding: 5rem 2rem; }
+.newsletter-inner { max-width: 640px; margin: 0 auto; text-align: center; }
+.newsletter-label {
+  display: inline-flex; align-items: center; gap: 10px; font-size: 0.72rem; font-weight: 600;
+  letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 1rem; font-family: var(--font-mono);
+}
+.newsletter-label::before { content: ''; width: 28px; height: 1px; background: var(--accent); }
+.newsletter-title { font-family: var(--font-display); font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 800; letter-spacing: -1px; line-height: 1.1; margin-bottom: 1rem; }
+.newsletter-title em { font-style: italic; color: var(--accent); }
+.newsletter-sub { color: var(--text2); font-size: 0.95rem; line-height: 1.7; margin-bottom: 2rem; }
+.newsletter-form { display: flex; gap: 10px; max-width: 420px; margin: 0 auto; }
+.newsletter-input {
+  flex: 1; padding: 12px 16px; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; color: var(--text);
+  font-family: var(--font-body); font-size: 0.88rem; outline: none; transition: border-color 0.2s, box-shadow 0.2s;
+}
+.newsletter-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.newsletter-input::placeholder { color: var(--muted); }
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 7px; background: var(--accent); color: #0a0e1a; font-weight: 700; font-size: 0.85rem;
+  padding: 12px 20px; border-radius: 10px; border: none !important; transition: transform 0.2s, box-shadow 0.2s, filter 0.2s;
+  white-space: nowrap; font-family: var(--font-body);
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(56,189,248,0.35); filter: brightness(1.08); }
+.newsletter-note { font-size: 0.72rem; color: var(--muted); font-family: var(--font-mono); margin-top: 0.75rem; }
+
+/* ══════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════ */
+footer { border-top: 1px solid var(--border); background: var(--surface); }
+.footer-inner { max-width: 1280px; margin: 0 auto; padding: 1.75rem 2rem; display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
+.footer-logo { font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; letter-spacing: -1px; color: var(--text); }
+.footer-logo span { color: var(--accent); }
+.footer-copy { font-size: 0.8rem; color: var(--muted); }
+.footer-links { display: flex; gap: 1.5rem; }
+.footer-links a { font-size: 0.8rem; color: var(--muted); transition: color 0.2s; }
+.footer-links a:hover { color: var(--accent); }
+
+/* ══════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .blog-grid { grid-template-columns: 1fr 1fr; }
+  .blog-card-featured { grid-column: span 2; }
+  .featured-visual { display: none; }
+}
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .nav-status .status-text { display: none; }
+  .blog-grid { grid-template-columns: 1fr; }
+  .blog-card-featured { grid-column: span 1; grid-template-columns: 1fr; }
+  .controls-inner { flex-direction: column; align-items: stretch; }
+  .search-wrapper { max-width: 100%; }
+  .newsletter-form { flex-direction: column; }
+  .blog-hero-title { letter-spacing: -2px; }
+  .modal-body { padding: 1.75rem; }
+}
+@media (max-width: 480px) {
+  .blog-content { padding: 2.5rem 1.25rem 6rem; }
+  .footer-inner { flex-direction: column; text-align: center; }
+  .blog-stats { gap: 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+<div class="cursor-dot" id="cursorDot"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+<canvas id="bgCanvas"></canvas>
+
+<!-- ═══════════════════════════════════════
+     NAV
+════════════════════════════════════════ -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a class="nav-logo" href="TJK_Portfolio.html">TJK<span>.</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="TJK_Portfolio.html#about"      class="nav-link">About</a></li>
+      <li><a href="TJK_Portfolio.html#projects"   class="nav-link">Projects</a></li>
+      <li><a href="TJK_Portfolio.html#experience" class="nav-link">Experience</a></li>
+      <li><a href="TJK_Portfolio.html#github"     class="nav-link">GitHub</a></li>
+      <li><a href="TJK_Blog.html"                 class="nav-link active">Blog</a></li>
+      <li><a href="TJK_Portfolio.html#contact"    class="nav-link">Contact</a></li>
+    </ul>
+    <div class="nav-right">
+      <div class="nav-status"><span class="status-dot"></span><span class="status-text">Available</span></div>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+      <button class="nav-burger" id="navBurger" aria-label="Open menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile drawer -->
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose">✕</button>
+  <ul>
+    <li><a href="TJK_Portfolio.html#about"      class="drawer-link">About</a></li>
+    <li><a href="TJK_Portfolio.html#projects"   class="drawer-link">Projects</a></li>
+    <li><a href="TJK_Portfolio.html#experience" class="drawer-link">Experience</a></li>
+    <li><a href="TJK_Portfolio.html#github"     class="drawer-link">GitHub</a></li>
+    <li><a href="TJK_Blog.html"                 class="drawer-link">Blog</a></li>
+    <li><a href="TJK_Portfolio.html#contact"    class="drawer-link">Contact</a></li>
+  </ul>
+</div>
+<div class="drawer-overlay" id="drawerOverlay"></div>
+
+<!-- ═══════════════════════════════════════
+     HERO
+════════════════════════════════════════ -->
+<header class="blog-hero">
+  <div class="blog-hero-inner">
+    <div class="blog-hero-eyebrow reveal"><span class="eyebrow-line"></span>Blog</div>
+    <h1 class="blog-hero-title reveal"><em>Articles</em> on <br>Software, Data &amp; AI</h1>
+    <p class="blog-hero-sub reveal">A collection of articles covering software development, data analysis, AI and technology. </p>
+    <div class="blog-stats reveal">
+      <div class="bs-item"><span class="bs-num">4</span><span class="bs-label">Articles</span></div>
+      <div class="bs-sep"></div>
+      <div class="bs-item"><span class="bs-num">4</span><span class="bs-label">Topics</span></div>
+      <div class="bs-sep"></div>
+      <div class="bs-item"><span class="bs-num">~10</span><span class="bs-label">Min avg. read</span></div>
+    </div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════
+     CONTROLS — search + filter
+════════════════════════════════════════ -->
+<div class="controls-section">
+  <div class="controls-inner">
+    <div class="search-wrapper">
+      <i class="fa-solid fa-magnifying-glass search-icon"></i>
+      <input type="text" class="search-input" id="blogSearch" placeholder="Search articles…" autocomplete="off">
+    </div>
+    <div class="filter-bar" id="filterBar">
+      <button class="filter-btn active" data-filter="all">All Posts</button>
+      <button class="filter-btn" data-filter="cloud">Cloud Architecture</button>
+      <button class="filter-btn" data-filter="devops">DevOps</button>
+      <button class="filter-btn" data-filter="biz">Business Analytics</button>
+      <button class="filter-btn" data-filter="edu">Education / Careers</button>
+    </div>
+    <div class="results-count" id="resultsCount">Showing <span id="visibleCount">4</span> of 4</div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     MAIN BLOG GRID
+════════════════════════════════════════ -->
+<main class="blog-content">
+  <div class="blog-grid" id="blogGrid">
+
+    <div class="blog-empty card-hidden" id="emptyState">
+
+      <i class="fa-regular fa-file-lines"></i>
+      <h3>No articles found</h3>
+      <p>Try a different search term or filter.</p>
+    </div>
+  </div>
+</main>
+
+<!-- ═══════════════════════════════════════
+     DYNAMIC FULL TEXT ARTICLE MODAL
+════════════════════════════════════════ -->
+<div class="article-modal" id="articleModal">
+  <div class="modal-content-wrapper">
+    <button class="modal-close-btn" id="closeModalBtn">✕</button>
+    <div class="modal-body">
+      <h1>APIs Explained: The Backbone of Modern Software</h1>
+      <hr>
+      <h2>Introduction</h2>
+      <p>Whenever a website asks you to "Login with Google," you're using an API. When you check tomorrow's weather on your phone, or pay for something on eBay with PayPal — that's an API too. They're everywhere, and most people use dozens of them daily without knowing it.</p>
+      <p>At its core, an API (Application Programming Interface) is a bridge between two applications. Instead of every developer rebuilding the same functionality from scratch, APIs let them tap into existing services — authentication, payments, maps, data — and connect them to their own product. That "Login with Google" button works because your browser pings Google's API, confirms your identity, and hands the result back to the site you're visiting. No new password required.</p>
+      
+      <h2>What Is an API?</h2>
+      <p>An API (Application Programming Interface) is a set of rules and protocols that defines how two applications can talk to each other — what requests they can make, what format data should be in, and what responses to expect.</p>
+      <p>The classic analogy: think of an API like a waiter in a restaurant. You're the customer, the kitchen is the server or database, and the waiter is the API. You don't need to know how the kitchen works — you just tell the waiter what you want. The waiter takes your order, passes it to the kitchen in a format it understands, and brings back the result.</p>
+      <p>In practice, that exchange looks like this: your app sends a <strong>request</strong> to an API endpoint — a specific URL that represents a resource or action. The API processes it and returns a <strong>response</strong>, usually as JSON data that your app can read and display. When you open a weather app and see today's forecast, your app sent a request to a weather API, and what you're seeing is the response.</p>
+      <p>APIs also act as a security layer. The kitchen never lets customers walk in — and a server never exposes its raw database to the outside world. The API controls exactly what can be asked for and what gets returned, keeping everything else protected.</p>
+
+      <h2>Why APIs Matter</h2>
+      <p>Before APIs, if you wanted to add payments to your app, you built a payment system. If you wanted maps, you built maps. Every team reinvented the same wheels, slowly and expensively.</p>
+      <p>APIs changed that. Instead of building from scratch, developers now connect to services that already do the job — Stripe for payments, Google Maps for location, Twilio for messaging — and get back to building what actually makes their product unique. That's the core value: <strong>APIs let developers stand on each other's shoulders.</strong></p>
+      <p>Beyond speed, APIs make software more resilient. Because each service is self-contained, you can update, replace, or scale one part of a system without touching the rest. A spike in traffic to your payment service doesn't bring down your entire app. A new feature can be added as a module without rewriting existing code.</p>
+      <p>They're also a security mechanism. Rather than giving external apps direct access to your database, an API exposes only what you choose — specific endpoints, with specific permissions. Everything else stays locked away.</p>
+
+      <h2>Types of APIs</h2>
+      <p>APIs are typically classified in two ways: by <strong>scope</strong> (who can access them) and by <strong>architecture</strong> (how they're structured and communicate).</p>
+      
+      <h3>Scope</h3>
+      <p>Scope is about permissions — who the API is designed for and what level of access they get.</p>
+      <p><strong>Public APIs (Open APIs):</strong> Open to any developer or business. Companies publish these to encourage third-party integrations and grow their ecosystem. Google Maps API is the textbook example — millions of apps embed it rather than building their own mapping infrastructure.</p>
+      <p><strong>Partner APIs:</strong> Not public, but not entirely private either. These are shared with specific, trusted business partners under formal agreements. A retailer might give a logistics company access to its order management API so shipments can be tracked in real time — but that access is scoped, credentialed, and governed by contract.</p>
+      <p><strong>Internal APIs (Private APIs):</strong> Hidden from the outside world entirely. Companies use these to connect internal systems — an HR portal pulling salary data from a payroll system, for example, or a microservices architecture where separate backend services talk to each other. Most large companies run hundreds of these without anyone outside ever knowing.</p>
+      <p><strong>Composite APIs:</strong> Rather than making several separate API calls, a composite API bundles multiple requests into one. This is especially useful in microservices environments where a single user action might require data from several services simultaneously — fetching a user profile, their order history, and their preferences in a single round trip instead of three.</p>
+
+      <h3>Architecture</h3>
+      <p>Architecture describes the rules and style that govern how an API is built and how it communicates. Different styles suit different use cases.</p>
+      <p><strong>REST (Representational State Transfer):</strong> REST is the dominant architecture style on the web today. It uses standard HTTP methods — GET, POST, PUT, DELETE — to perform operations on resources, each identified by a URL. REST APIs are stateless, meaning each request contains all the information needed to process it; the server holds no memory of previous requests. They typically return data as JSON. REST's simplicity, scalability, and compatibility with the web make it the default choice for most public APIs — Twitter, Stripe, and GitHub all use it.</p>
+      <p><strong>GraphQL:</strong> Developed by Meta and open-sourced in 2015, GraphQL flips the REST model on its head. Instead of the server defining fixed endpoints that return fixed data, the client specifies exactly what it needs in a single query. This eliminates over-fetching (getting more data than you need) and under-fetching (having to make multiple calls to get everything you need). GraphQL is particularly powerful for complex, data-heavy applications — it's why companies like Shopify and GitHub offer it as an alternative to their REST APIs.</p>
+      <p><strong>SOAP (Simple Object Access Protocol):</strong> SOAP is older, stricter, and more verbose than REST. It uses XML for all messages and follows a rigid contract defined in a WSDL (Web Services Description Language) file. That rigidity is actually the point — SOAP has built-in standards for security, transactions, and error handling that make it well-suited for enterprise environments where reliability and compliance matter more than speed. Banking systems and payment processors still use it widely.</p>
+      <p><strong>RPC (Remote Procedure Call):</strong> RPC takes a different conceptual approach. Rather than thinking in terms of resources (as REST does), RPC thinks in terms of actions. You're not fetching a resource at a URL — you're calling a function on a remote server. <code>getUser()</code>, <code>deleteOrder()</code>, <code>sendEmail()</code> — the API looks and feels like calling a local function in your code. XML-RPC and JSON-RPC are common implementations.</p>
+      <p><strong>gRPC:</strong> gRPC is Google's modern take on RPC, built for high-performance, low-latency communication — especially between internal microservices. Instead of JSON, it uses Protocol Buffers (protobufs), a binary format that is faster to transmit and smaller in size. gRPC also supports bidirectional streaming, meaning both client and server can send a stream of messages to each other simultaneously. It's overkill for public-facing APIs, but it's a go-to for internal service-to-service communication at scale.</p>
+      <p><strong>WebSocket APIs:</strong> Every API type above follows a request-response model — the client asks, the server answers, the connection closes. WebSockets break that pattern by keeping a persistent, two-way connection open between client and server. Either side can send data at any time without waiting for a request. This makes WebSockets ideal for anything that needs real-time updates — live chat, multiplayer games, stock tickers, collaborative editing tools like Google Docs.</p>
+
+      <h2>How APIs Work</h2>
+      <p>Every API interaction follows the same four-step cycle, regardless of what kind of API it is or what it's doing.</p>
+      <h3>1. The Client Sends a Request</h3>
+      <p>It starts with the client — your app, browser, or script — sending a request to the API. That request has four key components:</p>
+      <ul>
+        <li><strong>Endpoint</strong> — the URL that points to a specific resource or action. Think of it as the address. (<code>https://api.spotify.com/v1/tracks/{id}</code>)</li>
+        <li><strong>HTTP Method</strong> — the type of action being performed. The four most common are GET (retrieve data), POST (create something new), PUT (update something), and DELETE (remove something).</li>
+        <li><strong>Headers</strong> — metadata attached to the request, typically including authentication credentials like an API key or token.</li>
+        <li><strong>Body</strong> — optional. For POST and PUT requests, this contains the data you're sending, usually formatted as JSON.</li>
+      </ul>
+
+      <h3>2. The Server Receives the Request</h3>
+      <p>The request travels over the internet and lands at the API server. The first thing the server does is validate it — is this request coming from someone authorized to make it? Is the format correct? Is it asking for something that exists? Requests that fail these checks get rejected immediately, usually with a <code>401 Unauthorized</code> or <code>400 Bad Request</code> response code.</p>
+
+      <h3>3. The Server Processes the Request</h3>
+      <p>Once validated, the server gets to work. It queries a database, calls another internal service, runs some business logic — whatever is needed to fulfill the request. This step is invisible to the client. All the complexity of what's happening under the hood stays on the server's side, which is part of the point.</p>
+
+      <h3>4. The Response Is Returned</h3>
+      <p>The server packages the result and sends it back. Every response includes a <strong>status code</strong> that tells the client what happened:</p>
+      <ul>
+        <li><code>200 OK</code> — success</li>
+        <li><code>201 Created</code> — something was created successfully</li>
+        <li><code>404 Not Found</code> — the requested resource doesn't exist</li>
+        <li><code>500 Internal Server Error</code> — something went wrong on the server's end</li>
+      </ul>
+      <p>Along with the status code, the response body typically contains the requested data, formatted as JSON.</p>
+
+      <h3>Putting It Together: Fetching a User's Posts</h3>
+      <p>Say you're building an app that pulls posts from a user's profile using a social media API. Here's what that full cycle looks like in practice.</p>
+      <p><strong>The Request</strong></p>
+      <pre><code>GET https://api.example.com/v1/users/12345/posts
+Headers:
+  Authorization: Bearer your_api_token
+  Content-Type: application/json</code></pre>
+      <p>You're hitting the <code>/users/12345/posts</code> endpoint, identifying user 12345, and passing your API token in the header to prove you're authorized to access this data.</p>
+
+      <p><strong>The Response</strong></p>
+      <pre><code>{
+  "user_id": "12345",
+  "username": "tatenda_m",
+  "posts": [
+    {
+      "post_id": "001",
+      "content": "Just launched our new product. Check it out!",
+      "likes": 142,
+      "created_at": "2026-06-01T09:30:00Z"
+    }
+  ]
+}</code></pre>
+
+      <h2>Real-World Examples</h2>
+      <p>APIs aren't abstract infrastructure — they're the reason modern apps can do what they do without rebuilding the internet from scratch.</p>
+      <ul>
+        <li><strong>Google Maps API:</strong> Lets developers embed maps, calculate routes, and estimate travel times. When you open Uber and see your driver moving toward you in real time, you are watching this interface execute.</li>
+        <li><strong>OpenWeather API:</strong> Provides current conditions, hourly configurations, and alerts globally.</li>
+        <li><strong>PayPal API:</strong> Handles operational invoicing, checkout routines, and automatic payout structures safely.</li>
+        <li><strong>OpenAI API:</strong> Connects core systems straight into models like GPT-4 and DALL·E effortlessly.</li>
+      </ul>
+
+      <h2>Common Challenges</h2>
+      <p>APIs are powerful, but they present real engineering limitations such as <strong>Rate Limiting</strong> (capped throughput volumes), <strong>Versioning</strong> updates that drop support paths unexpectedly, and <strong>Authentication and Security</strong> management protocols (e.g., handling open OAuth tokens or vulnerable keys safely).</p>
+
+      <h2>Conclusion</h2>
+      <p>Understanding APIs isn't just useful for developers. As software continues to handle critical layers of business automation, the capacity to identify how these external connections work is necessary technical literacy.</p>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════
+     NEWSLETTER
+════════════════════════════════════════ -->
+<section class="newsletter-section">
+  <div class="newsletter-inner reveal">
+    <div class="newsletter-label">Stay Updated</div>
+    <h2 class="newsletter-title">New articles,<br><em>in your inbox.</em></h2>
+    <p class="newsletter-sub">Get notified when I publish new writeups on software structures, devops masterclasses, and tech education patterns.</p>
+    <form class="newsletter-form" id="newsletterForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+      <input type="email" name="email" class="newsletter-input" placeholder="your@email.com" required>
+      <button type="submit" class="btn-primary">Subscribe <i class="fa-solid fa-arrow-right"></i></button>
+    </form>
+    <p class="newsletter-note">No spam. Unsubscribe at any time.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     FOOTER
+════════════════════════════════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">TJK<span>.</span></div>
+    <p class="footer-copy">© 2026 Tatenda J. Kutadza · Harare, Zimbabwe</p>
+    <div class="footer-links">
+      <a href="TJK_Portfolio.html">Home</a>
+      <a href="TJK_Portfolio.html#contact">Contact</a>
+      <a href="mailto:tjkutadza@gmail.com">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ══════════════════════════════════════════
+   THEME PERSISTENCE
+══════════════════════════════════════════ */
+(function() {
+  const root = document.documentElement;
+  const btn  = document.getElementById('themeToggle');
+  const KEY  = 'tjk-theme';
+  const saved = localStorage.getItem(KEY);
+  if (saved) root.setAttribute('data-theme', saved);
+  if (btn) {
+    btn.addEventListener('click', () => {
+      const current = root.getAttribute('data-theme') || 'dark';
+      const next    = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      localStorage.setItem(KEY, next);
+    });
+  }
+})();
+
+/* ══════════════════════════════════════════
+   CUSTOM CURSOR LOGIC
+══════════════════════════════════════════ */
+(function() {
+  const dot  = document.getElementById('cursorDot');
+  const ring = document.getElementById('cursorRing');
+  if (!dot || !ring) return;
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px'; dot.style.top  = my + 'px';
+  });
+  (function loop() {
+    rx += (mx - rx) * 0.10; ry += (my - ry) * 0.10;
+    ring.style.left = rx + 'px'; ring.style.top  = ry + 'px';
+    requestAnimationFrame(loop);
+  })();
+  document.querySelectorAll('a, button, input, .filter-btn, .blog-card, .blog-card-featured').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hovered'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hovered'));
+  });
+})();
+
+/* ══════════════════════════════════════════
+   BACKGROUND CANVAS EFFECTS
+══════════════════════════════════════════ */
+(function() {
+  const canvas = document.getElementById('bgCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H, particles;
+  const mouse = { x: -1000, y: -1000 };
+  const COUNT = 50, MAX_DIST = 160, SPEED = 0.35;
+
+  function getAccent() {
+    return document.documentElement.getAttribute('data-theme') === 'light' ? [2, 132, 199] : [56, 189, 248];
+  }
+  function resize() {
+    W = canvas.width  = window.innerWidth; H = canvas.height = window.innerHeight;
+  }
+  function init() {
+    particles = Array.from({ length: COUNT }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - 0.5) * SPEED, vy: (Math.random() - 0.5) * SPEED,
+      r:  Math.random() * 1.5 + 0.5,
+    }));
+  }
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    const [r, g, b] = getAccent();
+    particles.forEach(p => {
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${r},${g},${b},0.5)`; ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  window.addEventListener('resize', resize);
+  resize(); init(); draw();
+})();
+
+/* ══════════════════════════════════════════
+   NAV DRAWER CONTROL
+══════════════════════════════════════════ */
+(function() {
+  const nav     = document.getElementById('mainNav');
+  const burger  = document.getElementById('navBurger');
+  const drawer  = document.getElementById('mobileDrawer');
+  const overlay = document.getElementById('drawerOverlay');
+  const closeBtn = document.getElementById('drawerClose');
+
+  window.addEventListener('scroll', () => { nav?.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+  burger?.addEventListener('click', () => { drawer.classList.add('open'); overlay.classList.add('open'); });
+  const close = () => { drawer.classList.remove('open'); overlay.classList.remove('open'); };
+  closeBtn?.addEventListener('click', close); overlay?.addEventListener('click', close);
+})();
+
+/* ══════════════════════════════════════════
+   SCROLL REVEAL IMPLEMENTATION
+══════════════════════════════════════════ */
+(function() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 70);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+
+/* ══════════════════════════════════════════
+   MODAL CONTROLLER (FOR FULL VIEWING)
+══════════════════════════════════════════ */
+(function() {
+  const modal = document.getElementById('articleModal');
+  const openBtn = document.getElementById('openFeaturedBtn');
+  const closeModalBtn = document.getElementById('closeModalBtn');
+
+  if(openBtn && modal) {
+    openBtn.addEventListener('click', () => {
+      modal.classList.add('modal-open');
+      document.body.style.overflow = 'hidden'; // Stop background scroll
+    });
+  }
+  if(closeModalBtn && modal) {
+    closeModalBtn.addEventListener('click', () => {
+      modal.classList.remove('modal-open');
+      document.body.style.overflow = '';
+    });
+  }
+})();
+
+/* ══════════════════════════════════════════
+   DYNAMIC POSTS FETCH, SEARCH & FILTERING
+══════════════════════════════════════════ */
+async function loadPosts() {
+  const grid = document.getElementById('blogGrid');
+  if (!grid) return;
+
+  try {
+    const res   = await fetch('posts.json');
+    const posts = await res.json();
+
+    // Sort newest first
+    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    grid.innerHTML = posts.map(post => `
+      <article class="blog-card reveal" data-category="${post.category}"
+               data-title="${post.title}" data-excerpt="${post.excerpt}">
+        <div class="blog-meta">
+          <span class="blog-tag ${post.category.toLowerCase()}">${post.category}</span>
+          <span class="blog-date">${formatDate(post.date)}</span>
+        </div>
+        <h2 class="blog-title">${post.title}</h2>
+        <p class="blog-excerpt">${post.excerpt}</p>
+        <div class="blog-footer">
+          <span class="read-time"><i class="fa-regular fa-clock"></i> ${post.readTime}</span>
+          <a href="articles/${post.slug}.html" class="blog-arrow">Read →</a>
+        </div>
+      </article>
+    `).join('') + `
+      <div class="blog-empty card-hidden" id="emptyState">
+        <i class="fa-regular fa-file-lines"></i>
+        <h3>No articles found</h3>
+        <p>Try a different search term or filter.</p>
+      </div>
+    `;
+
+    // Trigger Scroll Reveal on dynamically added items
+    if (window.IntersectionObserver) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 70);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+    // Initialize search and filter logic now that cards are attached to DOM
+    initFilters();
+
+  } catch (error) {
+    console.error("Error loading blog posts:", error);
+  }
+}
+
+function formatDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
+}
+
+function initFilters() {
+  const searchInput  = document.getElementById('blogSearch');
+  const filterBtns   = document.querySelectorAll('.filter-btn');
+  const cards        = document.querySelectorAll('#blogGrid [data-category]');
+  const emptyState   = document.getElementById('emptyState');
+  const visibleCount = document.getElementById('visibleCount');
+
+  let currentFilter = 'all';
+  let currentQuery  = '';
+
+  function updateResults() {
+    let visible = 0;
+    cards.forEach(card => {
+      const title    = (card.dataset.title || '').toLowerCase();
+      const excerpt  = (card.dataset.excerpt || '').toLowerCase();
+      const cat      = (card.dataset.category || '').toLowerCase();
+
+      const matchesSearch = !currentQuery || title.includes(currentQuery) || excerpt.includes(currentQuery);
+      const matchesFilter = currentFilter === 'all' || cat === currentFilter.toLowerCase();
+
+      if (matchesSearch && matchesFilter) {
+        card.classList.remove('card-hidden');
+        visible++;
+      } else {
+        card.classList.add('card-hidden');
+      }
+    });
+    if (emptyState) emptyState.classList.toggle('card-hidden', visible > 0);
+    if (visibleCount) visibleCount.textContent = visible;
+  }
+
+  // Clear existing inputs on fresh load
+  if (searchInput) searchInput.value = '';
+
+  searchInput?.addEventListener('input', () => {
+    currentQuery = searchInput.value.toLowerCase().trim();
+    updateResults();
+  });
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.filter;
+      updateResults();
+    });
+  });
+
+  // Run once initially to map the visible counts correctly
+  updateResults();
+}
+
+document.addEventListener('DOMContentLoaded', loadPosts);
+
+</script>
+</body>
+</html>

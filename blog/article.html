@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Loading Article... | Tatenda J. Kutadza</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+<link rel="stylesheet" href="../assets/css/style.css">
+
+<style>
+  /* Extra styling constraints for clean article reading */
+  .article-viewer-section {
+    padding-top: 8rem;
+    padding-bottom: 6rem;
+    min-height: 80vh;
+  }
+  .article-container {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .back-to-blog {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-family: var(--font-mono);
+    margin-bottom: 2.5rem;
+    transition: color 0.2s ease;
+  }
+  .back-to-blog:hover {
+    color: var(--primary);
+  }
+  /* Typography rules for fetched content inside raw HTML */
+  .article-body-content {
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+  .article-body-content h1 {
+    color: var(--text-main);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.2;
+  }
+  .article-body-content h2, .article-body-content h3 {
+    color: var(--text-main);
+    margin-top: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  .article-body-content p {
+    margin-bottom: 1.5rem;
+  }
+  .article-body-content ul, .article-body-content ol {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+  .article-body-content li {
+    margin-bottom: 0.5rem;
+  }
+  .error-container {
+    text-align: center;
+    padding: 4rem 0;
+  }
+  .error-container i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+
+  <header class="header">
+    <div class="header-container">
+      <a href="../index.html" class="logo">
+        <span class="logo-terminal">&gt;_</span>
+        <span class="logo-text">TJK<span class="logo-dot">.</span></span>
+      </a>
+      <nav class="nav-menu" id="navMenu">
+        <a href="../index.html#home" class="nav-link">Home</a>
+        <a href="../index.html#about" class="nav-link">About</a>
+        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="index.html" class="nav-link active">Blog</a>
+        <a href="../index.html#contact" class="nav-link">Contact</a>
+      </nav>
+      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Menu">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="../index.html#home" class="mobile-link">Home</a>
+    <a href="../index.html#about" class="mobile-link">About</a>
+    <a href="../index.html#projects" class="mobile-link">Projects</a>
+    <a href="index.html" class="mobile-link active">Blog</a>
+    <a href="../index.html#contact" class="mobile-link">Contact</a>
+  </div>
+
+  <main class="article-viewer-section">
+    <div class="container article-container">
+      
+      <a href="index.html" class="back-to-blog">
+        <i class="fa-solid fa-arrow-left"></i> Back to articles
+      </a>
+
+      <div id="articleStage" class="article-body-content">
+         <p style="font-family: var(--font-mono); color: var(--primary);">[SYSTEM]: Fetching structural elements from sub-directory...</p>
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <h3>TJK<span>.</span></h3>
+        <p>Premium Engineering · Clean Execution</p>
+      </div>
+      <p class="copyright">&copy; 2026 Tatenda J. Kutadza. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Mobile Hamburger Menu logic
+    const hamburger = document.getElementById('hamburgerBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    hamburger?.addEventListener('click', () => {
+      hamburger.classList.toggle('active');
+      mobileMenu.classList.toggle('active');
+    });
+
+    // Content Loader Engine
+    async function loadArticleContent() {
+      const stage = document.getElementById('articleStage');
+      if (!stage) return;
+
+      // Extract parameter strings from URL: ?id=understanding-apis
+      const urlParams = new URLSearchParams(window.location.search);
+      const articleId = urlParams.get('id');
+
+      if (!articleId) {
+        renderError("No dynamic pointer query specified.");
+        return;
+      }
+
+      try {
+        // Fetch the raw flat sub-HTML file from /blog/articles/
+        const res = await fetch(`articles/${articleId}.html`);
+        
+        if (!res.ok) {
+          throw new Error(`Target document file (articles/${articleId}.html) not found.`);
+        }
+
+        const rawHtmlContent = await res.text();
+
+        // Inject the bare article body straight into the styled template stage
+        stage.innerHTML = rawHtmlContent;
+
+        // Dynamic Document Tab Title Rewrite
+        const articleHeading = stage.querySelector('h1');
+        if (articleHeading) {
+          document.title = `${articleHeading.textContent} | Tatenda J. Kutadza`;
+        } else {
+          document.title = "View Article | Tatenda J. Kutadza";
+        }
+
+      } catch (err) {
+        console.error(err);
+        renderError("The requested document could not be rendered. Verify the article slug matching system.");
+      }
+    }
+
+    function renderError(msg) {
+      const stage = document.getElementById('articleStage');
+      stage.innerHTML = `
+        <div class="error-container">
+          <i class="fa-regular fa-circle-xmark"></i>
+          <h3>Document Loader Error</h3>
+          <p style="color: var(--text-secondary); margin-top: 0.5rem;">${msg}</p>
+        </div>
+      `;
+    }
+
+    document.addEventListener('DOMContentLoaded', loadArticleContent);
+  </script>
+</body>
+</html>

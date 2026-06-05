@@ -969,12 +969,16 @@ async function loadPosts() {
   if (!grid) return;
 
   try {
-    const res   = await fetch('posts.json');
+    // 1. Physically pull the live article catalog file
+    const res = await fetch('posts.json');
+    if (!res.ok) throw new Error("Could not find posts.json directory file.");
+    
     const posts = await res.json();
 
     // Sort newest first
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
+    // 2. Generate cards. NOTICE the href points to article.html instead of the raw file
     grid.innerHTML = posts.map(post => `
       <article class="blog-card reveal" data-category="${post.category}"
                data-title="${post.title}" data-excerpt="${post.excerpt}">
@@ -986,7 +990,7 @@ async function loadPosts() {
         <p class="blog-excerpt">${post.excerpt}</p>
         <div class="blog-footer">
           <span class="read-time"><i class="fa-regular fa-clock"></i> ${post.readTime}</span>
-          <a href="articles/${post.slug}.html" class="blog-arrow">Read →</a>
+          <a href="article.html?id=${post.slug}" class="blog-arrow">Read →</a>
         </div>
       </article>
     `).join('') + `
@@ -1015,6 +1019,7 @@ async function loadPosts() {
 
   } catch (error) {
     console.error("Error loading blog posts:", error);
+    grid.innerHTML = `<p style="text-align:center; color:var(--accent); font-family:var(--font-mono);">[SYSTEM ERROR]: Failed to parse dynamic posts.json database feed.</p>`;
   }
 }
 
@@ -1055,7 +1060,6 @@ function initFilters() {
     if (visibleCount) visibleCount.textContent = visible;
   }
 
-  // Clear existing inputs on fresh load
   if (searchInput) searchInput.value = '';
 
   searchInput?.addEventListener('input', () => {
@@ -1072,7 +1076,6 @@ function initFilters() {
     });
   });
 
-  // Run once initially to map the visible counts correctly
   updateResults();
 }
 

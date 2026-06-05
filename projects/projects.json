@@ -1,0 +1,92 @@
+[
+  {
+    "slug": "entry-level-job-analysis",
+    "title": "Entry Level Job Analysis in Zimbabwe",
+    "excerpt": "A data project focused on gathering, cleaning, and analyzing job market data to understand trends, key skills, and hiring requirements for entry-level positions across Zimbabwe.",
+    "category": "data",
+    "tags": ["Python", "Pandas", "Data Analysis"],
+    "featured": true,
+    "status": "Completed"
+  },
+  {
+    "slug": "twitter-sentiment-analysis",
+    "title": "Data Mining and Sentiment Analysis on X (Twitter)",
+    "excerpt": "An analytical pipeline designed to extract real-time data streams from X and classify public sentiment on specific topics using natural language processing tools.",
+    "category": "data ai",
+    "tags": ["Python", "NLP", "X API", "Data Mining"],
+    "featured": true,
+    "status": "Completed"
+  },
+  {
+    "slug": "automated-cms-creators",
+    "title": "Automated Content Management System for Content Creators",
+    "excerpt": "A specialized blogging platform featuring streamlined markdown rendering engine setups, content queues, and automated posting tools built for bloggers.",
+    "category": "web",
+    "tags": ["Node.js", "Express", "Markdown Engine"],
+    "featured": true,
+    "status": "Completed"
+  },
+  {
+    "slug": "cms-social-influencers",
+    "title": "A Content Management System for Social Media Influencers",
+    "excerpt": "An all-in-one management platform that helps influencers track, organize, and store diverse media types including video assets, images, text, and promotional articles.",
+    "category": "web",
+    "tags": ["React", "Node.js", "Media Storage"],
+    "featured": true,
+    "status": "Completed"
+  },
+  {
+    "slug": "personal-portfolio-website",
+    "title": "Personal Portfolio Website",
+    "excerpt": "The very site you are exploring right now. A high-performance, responsive personal website configured from scratch with plain web technologies, smooth navigation matrices, and light/dark configurations.",
+    "category": "web",
+    "tags": ["HTML5", "CSS3", "Vanilla JS"],
+    "featured": true,
+    "status": "Completed"
+  },
+  {
+    "slug": "ai-portfolio-integration",
+    "title": "Integrating AI into My Portfolio Website",
+    "excerpt": "An embedded artificial intelligence assistant planned for this portfolio site to deliver instant article summaries, handle automated contact forms, and guide visitors.",
+    "category": "ai",
+    "tags": ["AI Integration", "LLM Context", "UI Automation"],
+    "featured": false,
+    "status": "In Development"
+  },
+  {
+    "slug": "ai-social-chatbots",
+    "title": "AI Chatbots on WhatsApp, Telegram, Reddit, and Twitter",
+    "excerpt": "A collection of custom conversational agents built to handle automated customer requests and parse conversational updates over popular social channels via webhooks.",
+    "category": "ai",
+    "tags": ["Webhooks", "APIs", "AI Chatbots"],
+    "featured": true,
+    "status": "Completed"
+  },
+  {
+    "slug": "weather-application",
+    "title": "Weather Application",
+    "excerpt": "A full-stack weather interface utilizing geolocation and public weather APIs to present immediate meteorological tracking indexes and weekly forecasts.",
+    "category": "web",
+    "tags": ["JavaScript", "REST API", "Full Stack"],
+    "featured": false,
+    "status": "Completed"
+  },
+  {
+    "slug": "notes-application",
+    "title": "Notes Application",
+    "excerpt": "A simple, full-stack productivity tool delivering data persistence, text sorting filters, user session handling, and direct markdown document exports.",
+    "category": "web",
+    "tags": ["JavaScript", "CRUD Backend", "Database Storage"],
+    "featured": false,
+    "status": "Completed"
+  },
+  {
+    "slug": "multi-tenant-project-management",
+    "title": "Multi-tenant Project Management",
+    "excerpt": "A complex productivity platform engineered for software teams, utilizing multi-tenant database rules to securely isolate shared records and projects across multiple client setups.",
+    "category": "web",
+    "tags": ["PostgreSQL", "Multi-Tenancy", "IAM Rules"],
+    "featured": true,
+    "status": "Completed"
+  }
+]

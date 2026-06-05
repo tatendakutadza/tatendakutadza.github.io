@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Loading Article... | Tatenda J. Kutadza</title>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -11,67 +10,69 @@
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-<link rel="stylesheet" href="../assets/css/style.css">
-
 <style>
-  /* Extra styling constraints for clean article reading */
-  .article-viewer-section {
-    padding-top: 8rem;
-    padding-bottom: 6rem;
-    min-height: 80vh;
+  :root[data-theme="dark"] {
+    --bg: #030712;
+    --surface: #0b0f19;
+    --surface-card: #111827;
+    --border: rgba(243, 244, 246, 0.08);
+    --primary: #38bdf8;
+    --primary-rgb: 56, 189, 248;
+    --primary-hover: #0ea5e9;
+    --accent: #f43f5e;
+    --text-main: #f3f4f6;
+    --text-secondary: #9ca3af;
+    --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Fira Code', monospace;
   }
-  .article-container {
-    max-width: 760px;
-    margin: 0 auto;
-  }
-  .back-to-blog {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-secondary);
-    text-decoration: none;
-    font-size: 0.95rem;
-    font-family: var(--font-mono);
-    margin-bottom: 2.5rem;
-    transition: color 0.2s ease;
-  }
-  .back-to-blog:hover {
-    color: var(--primary);
-  }
-  /* Typography rules for fetched content inside raw HTML */
-  .article-body-content {
-    line-height: 1.8;
-    color: var(--text-secondary);
-  }
-  .article-body-content h1 {
-    color: var(--text-main);
-    font-size: 2.5rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-  }
-  .article-body-content h2, .article-body-content h3 {
-    color: var(--text-main);
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-  }
-  .article-body-content p {
-    margin-bottom: 1.5rem;
-  }
-  .article-body-content ul, .article-body-content ol {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-  }
-  .article-body-content li {
-    margin-bottom: 0.5rem;
-  }
-  .error-container {
-    text-align: center;
-    padding: 4rem 0;
-  }
-  .error-container i {
-    font-size: 3rem;
-    color: var(--accent);
-    margin-bottom: 1rem;
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background-color: var(--bg); color: var(--text-main); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+
+  /* Premium Header Navigation Layout Elements */
+  .header { position: fixed; top: 0; left: 0; width: 100%; height: 4.5rem; background: rgba(3, 7, 18, 0.75); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; display: flex; align-items: center; }
+  .header-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .logo { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 600; text-decoration: none; color: var(--text-main); display: flex; align-items: center; gap: 0.25rem; }
+  .logo-terminal { color: var(--primary); }
+  .logo-dot { color: var(--accent); }
+  .nav-menu { display: flex; gap: 2.25rem; }
+  .nav-link { font-family: var(--font-mono); font-size: 0.85rem; text-decoration: none; color: var(--text-secondary); transition: color 0.2s ease; position: relative; }
+  .nav-link:hover, .nav-link.active { color: var(--text-main); }
+  .nav-link.active::after { content: ''; position: absolute; bottom: -0.5rem; left: 0; width: 100%; height: 2px; background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+
+  /* Dynamic Article Container Typography Configurations */
+  .article-viewer-section { padding-top: 8rem; padding-bottom: 6rem; min-height: 85vh; position: relative; z-index: 10; }
+  .article-container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
+  
+  .back-to-blog { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-family: var(--font-mono); margin-bottom: 2.5rem; transition: color 0.2s ease; width: fit-content; }
+  .back-to-blog:hover { color: var(--primary); }
+
+  .article-body-content { line-height: 1.8; color: var(--text-secondary); font-size: 1.1rem; }
+  .article-body-content h1 { color: var(--text-main); font-size: 2.5rem; margin-bottom: 1.5rem; line-height: 1.2; font-weight: 700; letter-spacing: -0.025em; }
+  .article-body-content h2 { color: var(--text-main); font-size: 1.65rem; margin-top: 3rem; margin-bottom: 1rem; font-weight: 600; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
+  .article-body-content h3 { color: var(--text-main); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 0.75rem; }
+  .article-body-content p { margin-bottom: 1.5rem; }
+  .article-body-content ul, .article-body-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
+  .article-body-content li { margin-bottom: 0.65rem; }
+  .article-body-content strong { color: var(--text-main); font-weight: 600; }
+
+  /* Fallback Screen Layouts */
+  .error-container { text-align: center; padding: 5rem 0; font-family: var(--font-mono); }
+  .error-container i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.25rem; }
+  .error-container h3 { color: var(--text-main); margin-bottom: 0.5rem; }
+
+  /* Premium Footer Framework */
+  .footer { border-top: 1px solid var(--border); background: #020613; padding: 3rem 0; font-family: var(--font-sans); position: relative; z-index: 10; }
+  .footer-grid { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
+  .footer-brand h3 { font-family: var(--font-mono); font-size: 1.15rem; color: var(--text-main); margin-bottom: 0.25rem; }
+  .footer-brand h3 span { color: var(--accent); }
+  .footer-brand p { font-size: 0.8rem; color: var(--text-secondary); }
+  .copyright { font-size: 0.8rem; color: var(--text-secondary); }
+
+  @media (max-width: 768px) {
+    .nav-menu { display: none; }
+    .footer-grid { flex-direction: column; gap: 1.5rem; text-align: center; }
+    .article-body-content h1 { font-size: 2rem; }
   }
 </style>
 </head>
@@ -79,49 +80,33 @@
 
   <header class="header">
     <div class="header-container">
-      <a href="../index.html" class="logo">
+      <a href="/index.html" class="logo">
         <span class="logo-terminal">&gt;_</span>
         <span class="logo-text">TJK<span class="logo-dot">.</span></span>
       </a>
       <nav class="nav-menu" id="navMenu">
-        <a href="../index.html#home" class="nav-link">Home</a>
-        <a href="../index.html#about" class="nav-link">About</a>
-        <a href="../index.html#projects" class="nav-link">Projects</a>
+        <a href="/index.html#home" class="nav-link">Home</a>
+        <a href="/index.html#about" class="nav-link">About</a>
+        <a href="/index.html#projects" class="nav-link">Projects</a>
         <a href="index.html" class="nav-link active">Blog</a>
-        <a href="../index.html#contact" class="nav-link">Contact</a>
+        <a href="/index.html#contact" class="nav-link">Contact</a>
       </nav>
-      <button class="hamburger" id="hamburgerBtn" aria-label="Toggle Menu">
-        <span class="bar"></span>
-        <span class="bar"></span>
-        <span class="bar"></span>
-      </button>
     </div>
   </header>
 
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="../index.html#home" class="mobile-link">Home</a>
-    <a href="../index.html#about" class="mobile-link">About</a>
-    <a href="../index.html#projects" class="mobile-link">Projects</a>
-    <a href="index.html" class="mobile-link active">Blog</a>
-    <a href="../index.html#contact" class="mobile-link">Contact</a>
-  </div>
-
   <main class="article-viewer-section">
     <div class="container article-container">
-      
       <a href="index.html" class="back-to-blog">
         <i class="fa-solid fa-arrow-left"></i> Back to articles
       </a>
-
-      <div id="articleStage" class="article-body-content">
-         <p style="font-family: var(--font-mono); color: var(--primary);">[SYSTEM]: Fetching structural elements from sub-directory...</p>
-      </div>
-
+      <article id="articleStage" class="article-body-content">
+         <p style="font-family: var(--font-mono); color: var(--primary);">[SYSTEM]: Fetching content architecture from branch directory...</p>
+      </article>
     </div>
   </main>
 
   <footer class="footer">
-    <div class="container footer-grid">
+    <div class="footer-grid">
       <div class="footer-brand">
         <h3>TJK<span>.</span></h3>
         <p>Premium Engineering · Clean Execution</p>
@@ -131,64 +116,44 @@
   </footer>
 
   <script>
-    // Mobile Hamburger Menu logic
-    const hamburger = document.getElementById('hamburgerBtn');
-    const mobileMenu = document.getElementById('mobileMenu');
-    hamburger?.addEventListener('click', () => {
-      hamburger.classList.toggle('active');
-      mobileMenu.classList.toggle('active');
-    });
-
-    // Content Loader Engine
     async function loadArticleContent() {
       const stage = document.getElementById('articleStage');
       if (!stage) return;
 
-      // Extract parameter strings from URL: ?id=understanding-apis
       const urlParams = new URLSearchParams(window.location.search);
       const articleId = urlParams.get('id');
 
       if (!articleId) {
-        renderError("No dynamic pointer query specified.");
+        renderError("No look-up index string parameter specified.");
         return;
       }
 
       try {
-        // Fetch the raw flat sub-HTML file from /blog/articles/
-        const res = await fetch(`articles/${articleId}.html`);
-        
-        if (!res.ok) {
-          throw new Error(`Target document file (articles/${articleId}.html) not found.`);
-        }
+        // Fetch raw HTML fragments safely inside the sub-folder repository level
+        const res = await fetch(`./articles/${articleId}.html`);
+        if (!res.ok) throw new Error("Target file resource not resolved.");
+        const rawContentText = await res.text();
 
-        const rawHtmlContent = await res.text();
+        // Inject content directly into the styled layout stage
+        stage.innerHTML = rawContentText;
 
-        // Inject the bare article body straight into the styled template stage
-        stage.innerHTML = rawHtmlContent;
-
-        // Dynamic Document Tab Title Rewrite
+        // Set Tab Title configuration
         const articleHeading = stage.querySelector('h1');
-        if (articleHeading) {
-          document.title = `${articleHeading.textContent} | Tatenda J. Kutadza`;
-        } else {
-          document.title = "View Article | Tatenda J. Kutadza";
-        }
+        document.title = articleHeading ? `${articleHeading.textContent} | TJK` : "View Article | TJK";
 
       } catch (err) {
         console.error(err);
-        renderError("The requested document could not be rendered. Verify the article slug matching system.");
+        renderError("Failed to parse and structure the target text resource.");
       }
     }
 
     function renderError(msg) {
-      const stage = document.getElementById('articleStage');
-      stage.innerHTML = `
+      document.getElementById('articleStage').innerHTML = `
         <div class="error-container">
           <i class="fa-regular fa-circle-xmark"></i>
-          <h3>Document Loader Error</h3>
+          <h3>Document Loader Fault</h3>
           <p style="color: var(--text-secondary); margin-top: 0.5rem;">${msg}</p>
-        </div>
-      `;
+        </div>`;
     }
 
     document.addEventListener('DOMContentLoaded', loadArticleContent);

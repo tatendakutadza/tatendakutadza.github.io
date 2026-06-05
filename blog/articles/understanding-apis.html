@@ -1,0 +1,101 @@
+<h1 class="article-main-title">Understanding APIs: The Invisible Infrastructure Powering the Modern Web</h1>
+
+<section class="article-section intro">
+  <p>Whenever a website asks you to "Login with Google," you're using an API. When you check tomorrow's weather on your phone, or pay for something on eBay with PayPal — that's an API too. They're everywhere, and most people use dozens of them daily without knowing it.</p>
+  <p>At its core, an API (Application Programming Interface) is a bridge between two applications. Instead of every developer rebuilding the same functionality from scratch, APIs let them tap into existing services — authentication, payments, maps, data — and connect them to their own product. That "Login with Google" button works because your browser pings Google's API, confirms your identity, and hands the result back to the site you're visiting. No new password required.</p>
+</section>
+
+<section class="article-section">
+  <h2>What Is an API?</h2>
+  <p>An API (Application Programming Interface) is a set of rules and protocols that defines how two applications can talk to each other — what requests they can make, what format data should be in, and what responses to expect.</p>
+  <p>The classic analogy: think of an API like a waiter in a restaurant. You're the customer, the kitchen is the server or database, and the waiter is the API. You don't need to know how the kitchen works — you just tell the waiter what you want. The waiter takes your order, passes it to the kitchen in a format it understands, and brings back the result.</p>
+  <p>In practice, that exchange looks like this: your app sends a <strong>request</strong> to an API endpoint — a specific URL that represents a resource or action. The API processes it and returns a <strong>response</strong>, usually as JSON data that your app can read and display. When you open a weather app and see today's forecast, your app sent a request to a weather API, and what you're seeing is the response.</p>
+  <p>APIs also act as a security layer. The kitchen never lets customers walk in — and a server never exposes its raw database to the outside world. The API controls exactly what can be asked for and what gets returned, keeping everything else protected.</p>
+</section>
+
+<section class="article-section">
+  <h2>Why APIs Matter</h2>
+  <p>Before APIs, if you wanted to add payments to your app, you built a payment system. If you wanted maps, you built maps. Every team reinvented the same wheels, slowly and expensively.</p>
+  <p>APIs changed that. Instead of building from scratch, developers now connect to services that already do the job — Stripe for payments, Google Maps for location, Twilio for messaging — and get back to building what actually makes their product unique. That's the core value: <strong>APIs let developers stand on each other's shoulders.</strong></p>
+  <p>Beyond speed, APIs make software more resilient. Because each service is self-contained, you can update, replace, or scale one part of a system without touching the rest. A spike in traffic to your payment service doesn't bring down your entire app. A new feature can be added as a module without rewriting existing code.</p>
+  <p>They're also a security mechanism. Rather than giving external apps direct access to your database, an API exposes only what you choose — specific endpoints, with specific permissions. Everything else stays locked away.</p>
+</section>
+
+<section class="article-section">
+  <h2>Types of APIs</h2>
+  <p>APIs are typically classified in two ways: by <strong>scope</strong> (who can access them) and by <strong>architecture</strong> (how they're structured and communicate).</p>
+
+  <h3>Scope</h3>
+  <p>Scope is about permissions — who the API is designed for and what level of access they get.</p>
+  <ul>
+    <li><strong>Public APIs (Open APIs):</strong> Open to any developer or business. Companies publish these to encourage third-party integrations and grow their ecosystem. Google Maps API is the textbook example — millions of apps embed it rather than building their own mapping infrastructure.</li>
+    <li><strong>Partner APIs:</strong> Not public, but not entirely private either. These are shared with specific, trusted business partners under formal agreements. A retailer might give a logistics company access to its order management API so shipments can be tracked in real time.</li>
+    <li><strong>Internal APIs (Private APIs):</strong> Hidden from the outside world entirely. Companies use these to connect internal systems — an HR portal pulling salary data from a payroll system, for example. Most large companies run hundreds of these.</li>
+    <li><strong>Composite APIs:</strong> Rather than making several separate API calls, a composite API bundles multiple requests into one. This is especially useful in microservices environments where a single user action might require data from several services simultaneously.</li>
+  </ul>
+
+  <h3>Architecture</h3>
+  <p>Architecture describes the rules and style that govern how an API is built and how it communicates. Different styles suit different use cases.</p>
+  <ul>
+    <li><strong>REST (Representational State Transfer):</strong> REST is the dominant architecture style on the web today. It uses standard HTTP methods — GET, POST, PUT, DELETE — to perform operations on resources, each identified by a URL. REST APIs are stateless and typically return data as JSON. Their simplicity makes them the default choice for most public APIs.</li>
+    <li><strong>GraphQL:</strong> Developed by Meta, GraphQL flips the REST model on its head. Instead of the server defining fixed endpoints that return fixed data, the client specifies exactly what it needs in a single query. This eliminates over-fetching and under-fetching data.</li>
+    <li><strong>SOAP (Simple Object Access Protocol):</strong> Older, stricter, and more verbose than REST. It uses XML for all messages and follows a rigid contract. SOAP has built-in standards for security and transactions that make it well-suited for legacy enterprise environments like banking networks.</li>
+    <li><strong>RPC (Remote Procedure Call):</strong> RPC thinks in terms of actions rather than resources. You call a function on a remote server as if it were a local function in your code (e.g., <code>getUser()</code>, <code>sendEmail()</code>).</li>
+    <li><strong>gRPC:</strong> Google's modern take on RPC, built for high-performance, low-latency communication between internal microservices. It uses a compact binary format (Protocol Buffers) and supports bidirectional streaming.</li>
+    <li><strong>WebSocket APIs:</strong> Unlike request-response layouts, WebSockets break the pattern by keeping a persistent, two-way connection open. Either side can send data at any time without waiting, making it ideal for real-time live chat or stock tickers.</li>
+  </ul>
+</section>
+
+<section class="article-section">
+  <h2>How APIs Work</h2>
+  <p>Every API interaction follows the same four-step cycle, regardless of what kind of API it is or what it's doing.</p>
+
+  <h3>1. The Client Sends a Request</h3>
+  <p>It starts with the client — your app, browser, or script — sending a request to the API. That request has four key components:</p>
+  <ul>
+    <li><strong>Endpoint</strong> — the URL that points to a specific resource or action.</li>
+    <li><strong>HTTP Method</strong> — the type of action being performed (GET, POST, PUT, DELETE).</li>
+    <li><strong>Headers</strong> — metadata attached to the request, typically including authentication credentials like an API token.</li>
+    <li><strong>Body</strong> — optional payload data you are sending, usually formatted as JSON.</li>
+  </ul>
+
+  <h3>2. The Server Receives the Request</h3>
+  <p>The request travels over the internet and lands at the API server. The server validates it — checking authentication and confirming whether the format is accurate. Requests that fail these checks get rejected immediately with a <code>401 Unauthorized</code> or <code>400 Bad Request</code> response code.</p>
+
+  <h3>3. The Server Processes the Request</h3>
+  <p>Once validated, the server queries databases, executes business logic, or handles internal scripts. This structural layer remains invisible to the client.</p>
+
+  <h3>4. The Response Is Returned</h3>
+  <p>The server packages the result and sends it back with a status code (e.g., <code>200 OK</code> for success, <code>404 Not Found</code> if missing). The response body typically houses the requested details formatted as JSON payload data.</p>
+</section>
+
+<section class="article-section">
+  <h2>Real-World Examples</h2>
+  <ul>
+    <li><strong>Google Maps API:</strong> Lets developers embed maps, calculate routes, and estimate travel times without building any mapping infrastructure themselves. Powered inside tools like Uber and Yelp.</li>
+    <li><strong>OpenWeather API:</strong> Provides current conditions, forecasts, and historical metrics for coordinates anywhere globally to independent web apps.</li>
+    <li><strong>Stripe API & PayPal API:</strong> Handles payment flows, subscriptions, refunds, and compliance logic seamlessly for checkout forms.</li>
+    <li><strong>OpenAI API:</strong> Gives developers programmatic access to models like GPT-4, allowing advanced text generation or summarization integrations.</li>
+    <li><strong>Twilio API:</strong> Manages complex global telecom pipelines so applications can trigger transactional SMS alerts or voice verifications easily.</li>
+    <li><strong>Spotify API:</strong> Exposes music track metadata, album art configurations, and user playback playlist manipulation.</li>
+    <li><strong>GitHub API:</strong> Interacts with source repositories, issue trackers, and continuous integration webhooks.</li>
+  </ul>
+</section>
+
+<section class="article-section Reference-list">
+  <h2>References & Official Documentation</h2>
+  <ul>
+    <li>Google Maps Platform. <em>Maps JavaScript API Documentation.</em> Google Developers.</li>
+    <li>OpenWeatherMap. <em>API Documentation.</em></li>
+    <li>Stripe. <em>Stripe API Reference.</em></li>
+    <li>PayPal. <em>PayPal Developer Documentation.</em></li>
+    <li>OpenAI. <em>API Reference.</em></li>
+    <li>Twilio. <em>Twilio Docs.</em></li>
+    <li>Spotify. <em>Web API Reference.</em> Spotify for Developers.</li>
+    <li>GitHub. <em>REST API Documentation.</em></li>
+    <li>GraphQL. <em>Introduction to GraphQL.</em></li>
+    <li>gRPC. <em>gRPC Documentation.</em></li>
+    <li>Fielding, R. T. (2000). <em>Architectural Styles and the Design of Network-based Software Architectures.</em> Doctoral dissertation, University of California, Irvine.</li>
+    <li>OWASP. <em>API Security Top 10.</em></li>
+  </ul>
+</section>

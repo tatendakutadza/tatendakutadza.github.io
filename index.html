@@ -2412,10 +2412,14 @@ async function loadLatestPosts() {
     // 4. Trigger structural layout scroll-based animation handlers
     // Line 2413 — replace this:
        
+// Animate blog stats directly (they're already in view when posts load)
 if (artEl)  animateCounter(artEl,  totalArticles, 1200);
 if (topEl)  animateCounter(topEl,  uniqueTopics,  1200);
-if (readEl) animateCounter(readEl, avgMinutes,    1200);;
+if (readEl) animateCounter(readEl, avgMinutes,    1200);
 
+// Also trigger the hero counters observer (separate elements, separate container)
+triggerLiveCounters();
+       
     // 5. Sort entries dynamically (newest first) and grab top 3 for preview grid
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     const latestPosts = posts.slice(0, 3);

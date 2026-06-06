@@ -1697,110 +1697,27 @@ that combine analytical thinking with practical implementation.</p>
 
     <div class="hero-stats reveal" style="margin-bottom:2rem;">
       <div class="stat-item">
-        <div class="stat-num">4</div>
+        <div class="stat-num" id="dynamicArticleCount">0</div>
         <div class="stat-label">Articles</div>
       </div>
 
       <div class="stat-item">
-        <div class="stat-num">4</div>
+        <div class="stat-num" id="dynamicTopicCount">0</div>
         <div class="stat-label">Topics</div>
       </div>
 
       <div class="stat-item">
-        <div class="stat-num">~10</div>
-        <div class="stat-label">Min Read</div>
+        <div class="stat-num" id="dynamicAvgReadTime">0</div>
+        <div class="stat-label">Avg Min Read</div>
       </div>
     </div>
 
-    <div class="blog-grid reveal">
-
-      <!-- Featured -->
-      <article class="blog-card">
-        <div class="blog-meta">
-          <span class="blog-tag">Cloud Architecture</span>
-          <span class="blog-date">Jun 04, 2026</span>
-        </div>
-
-        <h3 class="blog-title">
-          APIs Explained: The Backbone of Modern Software
-        </h3>
-
-        <p class="blog-excerpt">
-          At its core, an API is a bridge between two applications.
-          Learn how REST, GraphQL, and microservice connections act as
-          the quiet framework of the internet.
-        </p>
-
-        <a href="blog/api-explained.html" class="blog-link">
-          Read Article →
-        </a>
-      </article>
-
-      <!-- Git -->
-      <article class="blog-card">
-        <div class="blog-meta">
-          <span class="blog-tag">DevOps</span>
-          <span class="blog-date">May 28, 2026</span>
-        </div>
-
-        <h3 class="blog-title">
-          Git and GitHub Mastery
-        </h3>
-
-        <p class="blog-excerpt">
-          Moving beyond simple push and pull commands. Explore branching,
-          interactive rebasing, merge conflict strategies, and GitHub
-          Actions automations.
-        </p>
-
-        <a href="blog/git-github-mastery.html" class="blog-link">
-          Read Article →
-        </a>
-      </article>
-
-      <!-- Data -->
-      <article class="blog-card">
-        <div class="blog-meta">
-          <span class="blog-tag">Business Analytics</span>
-          <span class="blog-date">May 12, 2026</span>
-        </div>
-
-        <h3 class="blog-title">
-          How Data Drives Business Decisions
-        </h3>
-
-        <p class="blog-excerpt">
-          Learn how modern analytical dashboards transform raw data
-          into insights that guide business strategy and decision making.
-        </p>
-
-        <a href="blog/data-driven-decisions.html" class="blog-link">
-          Read Article →
-        </a>
-      </article>
-
-      <!-- Portfolio -->
-      <article class="blog-card">
-        <div class="blog-meta">
-          <span class="blog-tag">Education / Careers</span>
-          <span class="blog-date">Apr 19, 2026</span>
-        </div>
-
-        <h3 class="blog-title">
-          Portfolio Websites for CS and IT Graduates
-        </h3>
-
-        <p class="blog-excerpt">
-          Discover how to build portfolio architectures that engage
-          hiring managers and showcase technical skills effectively.
-        </p>
-
-        <a href="blog/portfolio-websites.html" class="blog-link">
-          Read Article →
-        </a>
-      </article>
-
+    <div class="blog-grid" id="latestBlogGrid">
     </div>
+
+  <div style="text-align: center; margin-top: 3.5rem;" class="reveal">
+    <a href="blog.html" class="btn btn-primary">View All Articles</a>
+  </div>
 
     <div style="margin-top:2rem;text-align:center;">
       <a href="blog/index.html" class="btn-primary">
@@ -2474,6 +2391,78 @@ if ('serviceWorker' in navigator) {
       .catch(e => console.log('SW:', e));
   });
 }
+
+// ══════════════════════════════════════════
+// DYNAMIC LATEST POSTS LOADER FOR HOME PAGE
+// ══════════════════════════════════════════
+async function loadLatestPosts() {
+  const grid = document.getElementById('latestBlogGrid');
+  if (!grid) return;
+
+  try {
+    // Fetch from the root directory path relative to posts.json location
+    const res = await fetch('blog/posts.json');
+    if (!res.ok) throw new Error("Could not load posts mapping database.");
+    const posts = await res.json();
+
+    // 1. Sort newest first
+    posts.sort((a, b) => new Date(b.date) - new Date(a.date));
+
+    // 2. Take only the 3 most recent articles
+    const latestPosts = posts.slice(0, 3);
+
+    // 3. Render HTML templates dynamically
+    grid.innerHTML = latestPosts.map(post => `
+      <article class="blog-card reveal" data-category="${post.category}">
+        <div class="blog-meta">
+          <span class="blog-tag ${post.category.toLowerCase()}">${post.category}</span>
+          <span class="blog-date">${formatHomeDate(post.date)}</span>
+        </div>
+        <h3 class="blog-title" style="font-size: 1.25rem; margin: 0.5rem 0 1rem; font-family: var(--font-heading); font-weight:600;">
+          ${post.title}
+        </h3>
+        <p class="blog-excerpt" style="font-size: 0.95rem; color: var(--text-secondary); margin-bottom: 1.5rem; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">
+          ${post.excerpt}
+        </p>
+        <div class="blog-footer" style="display: flex; justify-content: space-between; align-items: center; margin-top: auto;">
+          <span class="read-time" style="font-size: 0.85rem; color: var(--text-muted);">
+            <i class="fa-regular fa-clock"></i> ${post.readTime}
+          </span>
+          <a href="blog/article.html?id=${post.slug}" class="blog-arrow" style="color: var(--primary); text-decoration: none; font-weight: 500; display: inline-flex; align-items: center; gap: 0.25rem;">
+            Read →
+          </a>
+        </div>
+      </article>
+    `).join('');
+
+    // 4. Reinject Scroll Reveal functionality onto the newly created nodes
+    if (window.IntersectionObserver) {
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach((entry, i) => {
+          if (entry.isIntersecting) {
+            setTimeout(() => entry.target.classList.add('visible'), i * 80);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.05 });
+      grid.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    }
+
+  } catch (error) {
+    console.error("Error loading homepage blog cards:", error);
+    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Unable to load articles at this time.</p>`;
+  }
+}
+
+function formatHomeDate(dateStr) {
+  return new Date(dateStr).toLocaleDateString('en-GB', {
+    day: 'numeric', month: 'short', year: 'numeric'
+  });
+}
+
+// Fire the load state when DOM is safe
+document.addEventListener('DOMContentLoaded', loadLatestPosts);
+
 </script>
 </body>
 </html>

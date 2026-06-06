@@ -5,6 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Loading Article... | Tatenda J. Kutadza</title>
 
+<script>
+  (function() {
+    const savedTheme = localStorage.getItem('tjk-theme');
+    if (savedTheme) {
+      document.documentElement.setAttribute('data-theme', savedTheme);
+    }
+  })();
+</script>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -22,97 +31,327 @@
     --accent: #f43f5e;
     --text-main: #f3f4f6;
     --text-secondary: #9ca3af;
-    --font-sans: 'Inter', sans-serif;
-    --font-mono: 'Fira Code', monospace;
+    --text-muted: #6b7280;
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.5);
+    --nav-blur: rgba(3, 7, 18, 0.8);
   }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background-color: var(--bg); color: var(--text-main); font-family: var(--font-sans); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+  :root[data-theme="light"] {
+    --bg: #f9fafb;
+    --surface: #ffffff;
+    --surface-card: #f3f4f6;
+    --border: rgba(0, 0, 0, 0.08);
+    --primary: #0284c7;
+    --primary-rgb: 2, 132, 199;
+    --primary-hover: #0369a1;
+    --accent: #e11d48;
+    --text-main: #111827;
+    --text-secondary: #4b5563;
+    --text-muted: #9ca3af;
+    --shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.05);
+    --nav-blur: rgba(249, 250, 251, 0.8);
+  }
 
-  /* Premium Header Navigation Layout Elements */
-  .header { position: fixed; top: 0; left: 0; width: 100%; height: 4.5rem; background: rgba(3, 7, 18, 0.75); -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px); border-bottom: 1px solid var(--border); z-index: 1000; display: flex; align-items: center; }
-  .header-container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-  .logo { font-family: var(--font-mono); font-size: 1.25rem; font-weight: 600; text-decoration: none; color: var(--text-main); display: flex; align-items: center; gap: 0.25rem; }
-  .logo-terminal { color: var(--primary); }
-  .logo-dot { color: var(--accent); }
-  .nav-menu { display: flex; gap: 2.25rem; }
-  .nav-link { font-family: var(--font-mono); font-size: 0.85rem; text-decoration: none; color: var(--text-secondary); transition: color 0.2s ease; position: relative; }
-  .nav-link:hover, .nav-link.active { color: var(--text-main); }
-  .nav-link.active::after { content: ''; position: absolute; bottom: -0.5rem; left: 0; width: 100%; height: 2px; background: var(--primary); box-shadow: 0 0 10px var(--primary); }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+  }
 
-  /* Dynamic Article Container Typography Configurations */
-  .article-viewer-section { padding-top: 8rem; padding-bottom: 6rem; min-height: 85vh; position: relative; z-index: 10; }
-  .article-container { max-width: 760px; margin: 0 auto; padding: 0 1.5rem; }
-  
-  .back-to-blog { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); text-decoration: none; font-size: 0.85rem; font-family: var(--font-mono); margin-bottom: 2.5rem; transition: color 0.2s ease; width: fit-content; }
-  .back-to-blog:hover { color: var(--primary); }
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg);
+    color: var(--text-main);
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
 
-  .article-body-content { line-height: 1.8; color: var(--text-secondary); font-size: 1.1rem; }
-  .article-body-content h1 { color: var(--text-main); font-size: 2.5rem; margin-bottom: 1.5rem; line-height: 1.2; font-weight: 700; letter-spacing: -0.025em; }
-  .article-body-content h2 { color: var(--text-main); font-size: 1.65rem; margin-top: 3rem; margin-bottom: 1rem; font-weight: 600; border-bottom: 1px solid var(--border); padding-bottom: 0.5rem; }
-  .article-body-content h3 { color: var(--text-main); font-size: 1.3rem; margin-top: 2rem; margin-bottom: 0.75rem; }
-  .article-body-content p { margin-bottom: 1.5rem; }
-  .article-body-content ul, .article-body-content ol { margin-bottom: 1.5rem; padding-left: 1.5rem; }
-  .article-body-content li { margin-bottom: 0.65rem; }
-  .article-body-content strong { color: var(--text-main); font-weight: 600; }
+  /* Global Navigation Header */
+  header {
+    position: sticky;
+    top: 0;
+    background-color: var(--nav-blur);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border);
+    z-index: 100;
+  }
 
-  /* Fallback Screen Layouts */
-  .error-container { text-align: center; padding: 5rem 0; font-family: var(--font-mono); }
-  .error-container i { font-size: 2.5rem; color: var(--accent); margin-bottom: 1.25rem; }
-  .error-container h3 { color: var(--text-main); margin-bottom: 0.5rem; }
+  .nav-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.25rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 
-  /* Premium Footer Framework */
-  .footer { border-top: 1px solid var(--border); background: #020613; padding: 3rem 0; font-family: var(--font-sans); position: relative; z-index: 10; }
-  .footer-grid { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; justify-content: space-between; align-items: center; }
-  .footer-brand h3 { font-family: var(--font-mono); font-size: 1.15rem; color: var(--text-main); margin-bottom: 0.25rem; }
-  .footer-brand h3 span { color: var(--accent); }
-  .footer-brand p { font-size: 0.8rem; color: var(--text-secondary); }
-  .copyright { font-size: 0.8rem; color: var(--text-secondary); }
+  .logo {
+    font-weight: 700;
+    font-size: 1.25rem;
+    color: var(--text-main);
+    text-decoration: none;
+    letter-spacing: -0.025em;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
 
-  @media (max-width: 768px) {
-    .nav-menu { display: none; }
-    .footer-grid { flex-direction: column; gap: 1.5rem; text-align: center; }
-    .article-body-content h1 { font-size: 2rem; }
+  .logo span {
+    color: var(--primary);
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+  }
+
+  .nav-links a:hover, .nav-links a.active {
+    color: var(--primary);
+  }
+
+  /* Structural Content Grid Layout */
+  .main-wrapper {
+    flex: 1;
+    max-width: 800px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 3rem 2rem;
+  }
+
+  .back-navigation {
+    margin-bottom: 2.5rem;
+  }
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-secondary);
+    text-decoration: none;
+    font-size: 0.95rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background-color: var(--surface);
+  }
+
+  .back-link:hover {
+    color: var(--primary);
+    border-color: rgba(var(--primary-rgb), 0.3);
+    background-color: rgba(var(--primary-rgb), 0.02);
+  }
+
+  /* Error Container Framework */
+  .error-container {
+    text-align: center;
+    padding: 4rem 2rem;
+    background-color: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: var(--shadow);
+  }
+
+  .error-container i {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 1.25rem;
+  }
+
+  .error-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+  }
+
+  /* Global Footer Layout template */
+  footer {
+    border-top: 1px solid var(--border);
+    background-color: var(--surface);
+    padding: 2rem;
+    text-align: center;
+    margin-top: auto;
+  }
+
+  footer p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+  }
+
+  /* ══════════════════════════════════════════
+     DYNAMIC ARTICLE CONTENT TYPOGRAPHY 
+  ══════════════════════════════════════════ */
+  .article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: var(--text-secondary);
+  }
+
+  /* Main Document Title */
+  .article-content h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    line-height: 1.25;
+    color: var(--text-main);
+    margin-bottom: 2rem;
+    letter-spacing: -0.03em;
+  }
+
+  /* Section Headings */
+  .article-content h2 {
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--text-main);
+    margin-top: 3rem;
+    margin-bottom: 1.25rem;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+    letter-spacing: -0.02em;
+  }
+
+  .article-content h3 {
+    font-size: 1.35rem;
+    font-weight: 600;
+    color: var(--primary);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  /* Text Elements Spacing */
+  .article-content p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+  }
+
+  /* Opening Paragraph Callouts */
+  .article-content .intro p {
+    font-size: 1.2rem;
+    line-height: 1.8;
+    color: var(--text-main);
+  }
+
+  /* Sequential Lists & Bullets Layout */
+  .article-content ul, 
+  .article-content ol {
+    margin-left: 1.5rem;
+    margin-bottom: 1.75rem;
+    padding-left: 0.5rem;
+  }
+
+  .article-content li {
+    margin-bottom: 0.65rem;
+    list-style-type: square;
+  }
+
+  .article-content li strong {
+    color: var(--text-main);
+  }
+
+  /* Geometric Layout Dividers */
+  .article-content hr {
+    border: 0;
+    border-top: 1px solid var(--border);
+    margin: 2.5rem 0;
+  }
+
+  /* Technical Inline Syntax Callouts */
+  .article-content code {
+    font-family: 'Fira Code', monospace;
+    font-size: 0.9em;
+    background-color: var(--surface-card);
+    color: var(--primary);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    border: 1px solid var(--border);
+  }
+
+  /* Multi-line Snippet Containers */
+  .article-content pre {
+    background-color: var(--surface-card);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 1.25rem;
+    overflow-x: auto;
+    margin: 1.75rem 0;
+  }
+
+  .article-content pre code {
+    background-color: transparent;
+    padding: 0;
+    border: none;
+    color: var(--text-main);
+    font-size: 0.9rem;
+  }
+
+  /* Academic References Formatting */
+  .article-content .Reference-list ul {
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+  }
+
+  .article-content .Reference-list li {
+    font-size: 0.95rem;
+    margin-bottom: 0.85rem;
+    color: var(--text-secondary);
+    border-left: 2px solid var(--primary);
+    padding-left: 1rem;
+    background-color: var(--surface);
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0 4px 4px 0;
+  }
+
+  @media (max-width: 640px) {
+    .article-content h1 { font-size: 2rem; }
+    .article-content h2 { font-size: 1.5rem; }
+    .main-wrapper { padding: 2rem 1.25rem; }
   }
 </style>
 </head>
 <body>
 
-  <header class="header">
-    <div class="header-container">
-      <a href="/index.html" class="logo">
-        <span class="logo-terminal">&gt;_</span>
-        <span class="logo-text">TJK<span class="logo-dot">.</span></span>
-      </a>
-      <nav class="nav-menu" id="navMenu">
-        <a href="/index.html#home" class="nav-link">Home</a>
-        <a href="/index.html#about" class="nav-link">About</a>
-        <a href="/index.html#projects" class="nav-link">Projects</a>
-        <a href="index.html" class="nav-link active">Blog</a>
-        <a href="/index.html#contact" class="nav-link">Contact</a>
-      </nav>
+  <header>
+    <div class="nav-container">
+      <a href="../index.html" class="logo">TJK<span>.</span></a>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../blog.html" class="active">Blog</a></li>
+      </ul>
     </div>
   </header>
 
-  <main class="article-viewer-section">
-    <div class="container article-container">
-      <a href="index.html" class="back-to-blog">
-        <i class="fa-solid fa-arrow-left"></i> Back to articles
+  <main class="main-wrapper">
+    <div class="back-navigation">
+      <a href="../blog.html" class="back-link">
+        <i class="fa-solid fa-arrow-left"></i> Back to Feed
       </a>
-      <article id="articleStage" class="article-body-content">
-         <p style="font-family: var(--font-mono); color: var(--primary);">[SYSTEM]: Fetching content architecture from branch directory...</p>
-      </article>
     </div>
+
+    <article class="article-content" id="articleStage">
+      <div style="text-align: center; padding: 3rem; color: var(--text-muted);">
+        <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 2rem; margin-bottom: 1rem; color: var(--primary);"></i>
+        <p>Loading document structures...</p>
+      </div>
+    </article>
   </main>
 
-  <footer class="footer">
-    <div class="footer-grid">
-      <div class="footer-brand">
-        <h3>TJK<span>.</span></h3>
-        <p>Premium Engineering · Clean Execution</p>
-      </div>
-      <p class="copyright">&copy; 2026 Tatenda J. Kutadza. All rights reserved.</p>
-    </div>
+  <footer>
+    <p>&copy; 2026 Tatenda J. Kutadza. All rights reserved.</p>
   </footer>
 
   <script>
@@ -124,20 +363,20 @@
       const articleId = urlParams.get('id');
 
       if (!articleId) {
-        renderError("No look-up index string parameter specified.");
+        renderError("No lookup structural mapping parameters assigned to the frame engine URL.");
         return;
       }
 
       try {
-        // Fetch raw HTML fragments safely inside the sub-folder repository level
+        // Fetch raw HTML structural fragments securely from the articles folder
         const res = await fetch(`./articles/${articleId}.html`);
-        if (!res.ok) throw new Error("Target file resource not resolved.");
+        if (!res.ok) throw new Error("Target resource file index could not be resolved.");
         const rawContentText = await res.text();
 
         // Inject content directly into the styled layout stage
         stage.innerHTML = rawContentText;
 
-        // Set Tab Title configuration
+        // Synchronize Tab Document Title meta configuration
         const articleHeading = stage.querySelector('h1');
         document.title = articleHeading ? `${articleHeading.textContent} | TJK` : "View Article | TJK";
 
@@ -149,10 +388,10 @@
 
     function renderError(msg) {
       document.getElementById('articleStage').innerHTML = `
-        <div class="error-container">
-          <i class="fa-regular fa-circle-xmark"></i>
+        <div class=\"error-container\">
+          <i class=\"fa-regular fa-circle-xmark\"></i>
           <h3>Document Loader Fault</h3>
-          <p style="color: var(--text-secondary); margin-top: 0.5rem;">${msg}</p>
+          <p style=\"color: var(--text-secondary); margin-top: 0.5rem;\">${msg}</p>
         </div>`;
     }
 
@@ -160,3 +399,4 @@
   </script>
 </body>
 </html>
+

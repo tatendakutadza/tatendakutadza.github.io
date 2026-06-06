@@ -2347,22 +2347,43 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// counters.js
-// counters.js — animated number counters in hero stats
-
+// ══════════════════════════════════════════
+// CORE MATH COUNTER ENGINE ANIMATOR
+// ══════════════════════════════════════════
 function animateCounter(el, target, duration = 1400) {
   const start = performance.now();
   const step = (now) => {
     const elapsed  = now - start;
     const progress = Math.min(elapsed / duration, 1);
-    // Ease out cubic
-    const ease = 1 - Math.pow(1 - progress, 3);
+    const ease = 1 - Math.pow(1 - progress, 3); // Ease out cubic
     el.textContent = Math.round(ease * target);
     if (progress < 1) requestAnimationFrame(step);
     else el.textContent = target;
   };
   requestAnimationFrame(step);
 }
+
+// ══════════════════════════════════════════
+// ACTIVE NAVIGATION HIGHLIGHT OBSERVER
+// ══════════════════════════════════════════
+const navSections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-link');
+
+const navObserver = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.getAttribute('id');
+      navLinks.forEach(link => {
+        link.classList.remove('active');
+        if (link.getAttribute('href') === `#${id}`) {
+          link.classList.add('active');
+        }
+      });
+    }
+  });
+}, { threshold: 0.25, rootMargin: "-10% 0px -70% 0px" });
+
+navSections.forEach(s => navObserver.observe(s));
 
 // ══════════════════════════════════════════
 // PWA INITIALIZATION
@@ -2377,16 +2398,16 @@ if ('serviceWorker' in navigator) {
 // COMPLETE DYNAMIC BLOG ENGINE & METRICS LOADER
 // ══════════════════════════════════════════
 async function loadLatestPosts() {
-  const grid = document.getElementById('latestBlogGrid');
+  const grid = document.getElementById('blogGrid');
   if (!grid) return;
 
   try {
-    // 1. Fetch live data from your central database configuration
+    // Fetch live data array directly from your blog directory
     const res = await fetch('blog/posts.json');
     if (!res.ok) throw new Error("Could not load posts mapping database.");
     const posts = await res.json();
 
-    // 2. Compute live operational section metrics
+    // 1. Compute rolling metrics calculations from your live array database
     const totalArticles = posts.length;
     const uniqueTopics = [...new Set(posts.map(p => p.category))].length;
     
@@ -2396,7 +2417,7 @@ async function loadLatestPosts() {
     }, 0);
     const avgMinutes = totalArticles > 0 ? Math.round(totalMinutes / totalArticles) : 0;
 
-    // 3. Inject computed numbers onto the counter target variables
+    // 2. Extract DOM nodes securely and append raw targeted properties
     const artEl = document.getElementById('dynamicArticleCount');
     const topEl = document.getElementById('dynamicTopicCount');
     const readEl = document.getElementById('dynamicAvgReadTime');
@@ -2405,13 +2426,14 @@ async function loadLatestPosts() {
     if (topEl) topEl.setAttribute('data-live-target', uniqueTopics);
     if (readEl) readEl.setAttribute('data-live-target', avgMinutes);
 
-    // 4. Trigger structural layout scroll-based animation handlers
+    // 3. Kick start scroll intersection watcher loops for rolling animation numbers
     triggerLiveCounters();
 
-    // 5. Sort entries dynamically (newest first) and grab top 3 for preview grid
+    // 4. Sort posts descending by date timeline and take top 3 previews
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
     const latestPosts = posts.slice(0, 3);
 
+    // 5. Output dynamic article preview cards html nodes mapping
     grid.innerHTML = latestPosts.map(post => `
       <article class="blog-card reveal" data-category="${post.category}">
         <div class="blog-meta">
@@ -2435,7 +2457,7 @@ async function loadLatestPosts() {
       </article>
     `).join('');
 
-    // 6. Securely link Intersection Observer animation triggers onto dynamic components
+    // 6. Connect scroll animations to reveal dynamic card components smoothly
     if (window.IntersectionObserver) {
       const observer = new IntersectionObserver(entries => {
         entries.forEach((entry, i) => {
@@ -2449,14 +2471,14 @@ async function loadLatestPosts() {
     }
 
   } catch (error) {
-    console.error("Error setting up dynamic homepage blog segments:", error);
-    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted);">Unable to synchronize latest updates.</p>`;
+    console.error("Runtime pipeline execution fault inside blog section engine:", error);
+    grid.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--text-muted); padding: 2rem 0;">Unable to load recent articles at this time.</p>`;
   }
 }
 
-// Intercept scroll intersection bounds to animate rolling numbers
+// Watch bounds intersections to run text spinning counters animation systems smoothly
 function triggerLiveCounters() {
-  const statsEl = document.querySelector('.hero-stats');
+  const statsEl = document.querySelector('.blog-stats');
   if (!statsEl || !window.IntersectionObserver) return;
 
   const liveObserver = new IntersectionObserver(entries => {
@@ -2474,7 +2496,7 @@ function triggerLiveCounters() {
         liveObserver.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
+  }, { threshold: 0.1 });
 
   liveObserver.observe(statsEl);
 }
@@ -2485,14 +2507,14 @@ function formatHomeDate(dateStr) {
   });
 }
 
-// Fire global execution vectors once structural asset pipelines assemble
+// Fire secure startup hooks when frame renders DOM trees completely
 document.addEventListener('DOMContentLoaded', () => {
-  // Initialize dynamic feed mapping pipelines
+  // Fire data streams
   loadLatestPosts();
 
-  // Initialize typing banner elements tracking loop
+  // Handle typing effect headers logic loops
   const elements = document.getElementsByClassName('txt-rotate');
-  for (let i=0; i<elements.length; i++) {
+  for (let i = 0; i < elements.length; i++) {
     const toRotate = elements[i].getAttribute('data-rotate');
     const period = elements[i].getAttribute('data-period');
     if (toRotate) {
@@ -2500,8 +2522,8 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 });
-
-
 </script>
+
+
 </body>
 </html>

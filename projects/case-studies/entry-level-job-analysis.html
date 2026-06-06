@@ -1,0 +1,52 @@
+<h1>Entry-Level Job Analysis in Zimbabwe</h1>
+
+<div class="project-metadata-strip" style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0 2.5rem 0; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted);">
+  <div><i class="fa-regular fa-calendar" style="color: var(--accent);"></i> <strong>Status:</strong> Completed</div>
+  <div><i class="fa-regular fa-folder" style="color: var(--accent);"></i> <strong>Category:</strong> Data Analytics</div>
+  <div><i class="fa-solid fa-code-branch" style="color: var(--accent);"></i> <strong>Scope:</strong> National Market Analysis</div>
+</div>
+
+<p class="project-lead" style="font-size: 1.2rem; line-height: 1.8; color: var(--text); margin-bottom: 2rem; font-weight: 400;">
+  An analysis of the Zimbabwean job market to determine the careers with the highest demand and the relationship between a location in the country and the most common job positions posted by businesses.
+</p>
+
+<div class="project-action-buttons" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem;">
+  <a href="https://github.com/tatendakutadza/entry-level-job-analysis" target="_blank" class="action-btn-link" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 10px 20px; border-radius: 8px; transition: all 0.2s ease;">
+    <i class="fa-brands fa-github" style="font-size: 1.1rem;"></i> View Source Code
+  </a>
+  <a href="https://tatendakutadza.github.io/job-analysis-demo" target="_blank" class="action-btn-link production-primary" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; background: var(--accent); border: 1px solid var(--accent); color: #0a0e1a; padding: 10px 20px; border-radius: 8px; transition: all 0.2s ease;">
+    <i class="fa-solid fa-chart-line" style="font-size: 1rem;"></i> View Live Demo
+  </a>
+</div>
+
+<h2>Project Overview & Objectives</h2>
+<p>
+  Navigating the entry-level job ecosystem can be difficult due to fragmented job postings and unstructured hiring patterns. The primary objective of this case study was to programmatically scrape, clean, and map hiring requests across different cities in Zimbabwe. This data mining loop uncovers hidden trends regarding what industries are expanding and where specific tech and business talents are concentrated.
+</p>
+
+<h2>The Technical Pipeline</h2>
+<p>
+  To achieve a reliable analytical framework, the data was processed through three distinct operational phases:
+</p>
+<ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text2);">
+  <li><strong>Ingestion & Scraping:</strong> Target acquisition routines collected raw hiring listings from regional bulletin feeds, job boards, and business indexes.</li>
+  <li><strong>Data Transformation (Pandas):</strong> Handled string isolation filters to fix misspelled job titles, eliminated duplicate records, and normalized location coordinates (e.g., merging variations of "Harare" and "Bulawayo").</li>
+  <li><strong>Spatial Clustering:</strong> Evaluated position dense nodes against geographic markers to determine if business layout requirements vary by province.</li>
+</ul>
+
+<h2>Key Analytical Discoveries</h2>
+<p>
+  The findings show a clear link between a business's physical location and its functional hiring demands:
+</p>
+<ol style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text2);">
+  <li><strong>The Regional Core Split:</strong> Technical roles, full-stack programming positions, and operational administration management tasks dominate the corporate job market in Harare. Meanwhile, logistics, supply chain tracking, and agricultural processing roles appear more frequently in regional hubs.</li>
+  <li><strong>The Entry-Level Skills Gap:</strong> A high percentage of entry-level business and technical postings specifically require cloud literacy, basic database interaction tools (SQL), or data management skills, signaling a shift in baseline hiring expectations.</li>
+</ol>
+
+<h2>Technologies Deployed</h2>
+<div class="tech-used-cloud" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 1.5rem 0 3rem 0;">
+  <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 4px 12px; background: rgba(56,189,248,0.06); border: 1px solid var(--border); border-radius: 6px; color: var(--accent);">Python</span>
+  <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 4px 12px; background: rgba(56,189,248,0.06); border: 1px solid var(--border); border-radius: 6px; color: var(--accent);">Pandas</span>
+  <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 4px 12px; background: rgba(56,189,248,0.06); border: 1px solid var(--border); border-radius: 6px; color: var(--accent);">Jupyter Notebooks</span>
+  <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 4px 12px; background: rgba(56,189,248,0.06); border: 1px solid var(--border); border-radius: 6px; color: var(--accent);">Data Scraping</span>
+</div>

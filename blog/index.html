@@ -661,7 +661,10 @@ footer { border-top: 1px solid var(--border); background: var(--surface); }
       <button class="filter-btn active" data-filter="all">All Posts</button>
       
     </div>
-    <div class="results-count" id="resultsCount">Showing <span id="visibleCount">4</span> of 4</div>
+    <div class="results-count" id="resultsCount">
+        Showing <span id="visibleCount">0</span> of <span id="totalCount">0</span>
+    </div>
+
   </div>
 </div>
 
@@ -979,6 +982,7 @@ async function loadPosts() {
     const res = await fetch('./posts.json');
     if (!res.ok) throw new Error("Could not find posts.json directory file.");
     const posts = await res.json();
+    document.getElementById('totalCount').textContent = posts.length;
 
     // 1. Sort newest first
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));

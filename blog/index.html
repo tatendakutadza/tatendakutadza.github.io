@@ -959,28 +959,56 @@ Headers:
 })();
 
 /* ══════════════════════════════════════════
-   DYNAMIC POSTS FETCH, SEARCH & FILTERING
+   DYNAMIC POSTS FETCH, SEARCH & FILTERING (AUTO-GENERATE BUTTONS)
 ══════════════════════════════════════════ */
+// Human-readable presentation mapping dictionary
+const CATEGORY_LABELS = {
+  "cloud": "Cloud Architecture",
+  "devops": "DevOps",
+  "git": "Git & Version Control",
+  "biz": "Business Analytics",
+  "edu": "Education / Careers"
+};
+
 async function loadPosts() {
   const grid = document.getElementById('blogGrid');
+  const filterBar = document.getElementById('filterBar');
   if (!grid) return;
 
   try {
-    // Uses a dot-relative link to ensure it fetches from the blog directory
     const res = await fetch('./posts.json');
     if (!res.ok) throw new Error("Could not find posts.json directory file.");
-    
     const posts = await res.json();
 
-    // Sort newest first
+    // 1. Sort newest first
     posts.sort((a, b) => new Date(b.date) - new Date(a.date));
 
-    // Dynamic grid generation pointing to the layout template wrapper
+    // 2. Extract and compile unique categories dynamically from the JSON objects
+    const dynamicCategories = new Set();
+    posts.forEach(post => {
+      if (post.category) {
+        // Split by space to support multi-tagged articles
+        post.category.toLowerCase().split(' ').forEach(cat => {
+          if (cat.trim()) dynamicCategories.add(cat.trim());
+        });
+      }
+    });
+
+    // 3. Generate and inject dynamic category filter buttons
+    // Keeps the initial "All Posts" button intact and appends the new ones
+    const allBtnHtml = `<button class="filter-btn active" data-filter="all">All Posts</button>`;
+    filterBar.innerHTML = allBtnHtml + Array.from(dynamicCategories).map(cat => {
+      // Look up premium display name; default to capitalizing the raw slug if missing
+      const displayName = CATEGORY_LABELS[cat] || (cat.charAt(0).toUpperCase() + cat.slice(1));
+      return `<button class="filter-btn" data-filter="${cat}">${displayName}</button>`;
+    }).join('');
+
+    // 4. Dynamic grid generation pointing to the layout template wrapper
     grid.innerHTML = posts.map(post => `
       <article class="blog-card reveal" data-category="${post.category}"
                data-title="${post.title}" data-excerpt="${post.excerpt}">
         <div class="blog-meta">
-          <span class="blog-tag ${post.category.toLowerCase()}">${post.category}</span>
+          <span class="blog-tag">${post.category.split(' ').map(c => CATEGORY_LABELS[c] || c).join(' / ')}</span>
           <span class="blog-date">${formatDate(post.date)}</span>
         </div>
         <h2 class="blog-title">${post.title}</h2>
@@ -998,7 +1026,7 @@ async function loadPosts() {
       </div>
     `;
 
-    // Re-bind scroll reveal observation loops to newly generated cards
+    // 5. Re-bind scroll reveal observation loops to newly generated cards
     if (window.IntersectionObserver) {
       const observer = new IntersectionObserver(entries => {
         entries.forEach((entry, i) => {
@@ -1011,7 +1039,7 @@ async function loadPosts() {
       document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     }
 
-    // Pass runtime execution over to the user interaction filters
+    // 6. Pass execution to interaction handlers (binds click events to the fresh buttons)
     initFilters();
 
   } catch (error) {
@@ -1039,12 +1067,12 @@ function initFilters() {
   function updateResults() {
     let visible = 0;
     cards.forEach(card => {
-      const title    = (card.dataset.title || '').toLowerCase();
-      const excerpt  = (card.dataset.excerpt || '').toLowerCase();
-      const cat      = (card.dataset.category || '').toLowerCase();
+      const title   = (card.dataset.title || '').toLowerCase();
+      const excerpt = (card.dataset.excerpt || '').toLowerCase();
+      const categories = (card.dataset.category || '').toLowerCase().split(' ');
 
       const matchesSearch = !currentQuery || title.includes(currentQuery) || excerpt.includes(currentQuery);
-      const matchesFilter = currentFilter === 'all' || cat === currentFilter.toLowerCase();
+      const matchesFilter = currentFilter === 'all' || categories.includes(currentFilter.toLowerCase());
 
       if (matchesSearch && matchesFilter) {
         card.classList.remove('card-hidden');
@@ -1077,6 +1105,7 @@ function initFilters() {
 }
 
 document.addEventListener('DOMContentLoaded', loadPosts);
+
 </script>
 </body>
 </html>

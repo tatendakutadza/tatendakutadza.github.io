@@ -468,7 +468,7 @@ function initCaseStudyLoader() {
 
     try {
       // Dynamically fetch from your custom paths setup
-      const res = await fetch(`./projects/case-studies/${slug}.html`);
+      const res = await fetch(`./case-studies/${slug}.html`);
       if (!res.ok) throw new Error("Target case study resource file unresolved.");
       const htmlContent = await res.text();
       

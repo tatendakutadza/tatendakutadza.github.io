@@ -2466,9 +2466,9 @@ function triggerLiveCounters() {
   const liveObserver = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        const nums = entry.target.querySelectorAll('.stat-num[data-live-target]');
+        const nums = entry.target.querySelectorAll('.stat-num[data-target]');
         nums.forEach(n => {
-          const targetVal = parseInt(n.getAttribute('data-live-target')) || 0;
+          const targetVal = parseInt(n.getAttribute('data-target')) || 0;
           if (typeof animateCounter === "function") {
             animateCounter(n, targetVal, 1200);
           } else {

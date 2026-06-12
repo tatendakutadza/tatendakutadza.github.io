@@ -72,39 +72,59 @@
     "readTime": "10 min read"
   },
   {
-"title": "Who Owns African Data? The Hidden Risk in Every AI Tool",
-"slug": "who-owns-african-data-infrastructure-risk",
-"excerpt": "A deep dive into data residency, the CLOUD Act, and why national data ownership is a strategic infrastructure issue"
-},
-{
-"title": "Building AI That Works During Load Shedding",
-"slug": "engineering-ai-constrained-environments",
-"excerpt": "Beyond the tools: How to architect resilient, low-cost, and independent AI pipelines optimized for real-world infrastructure constraints."
-},
-{
-"title": "Why Most Businesses Don't Need a Custom AI Model",
-"slug": "why-businesses-dont-need-custom-ai",
-"excerpt": "Most companies have a knowledge retrieval problem, not an intelligence problem. Here is why you need RAG, not a freshly trained LLM."
-},
-{
-"title": "Why AI Understands Shakespeare Better Than Shona",
-"slug": "why-ai-understands-shakespeare-better-than-shona",
-"excerpt": "An economic analysis of training data scarcity, language representation, and the market realities shaping modern LLM capabilities."
-},
-{
-"title": "Africa's Most Valuable Resource Isn't Lithium. It's Data.",
-"slug": "africas-most-valuable-resource-is-data",
-"excerpt": "Why data must be treated as critical national infrastructure, exploring data scarcity, synthetic generation, and competitive advantages."
-},
-{
-"title": "Before You Fine-Tune a Model, Read This",
-"slug": "before-you-fine-tune-a-model",
-"excerpt": "Busting the myths around model customization. A realistic look at cost, complexity, and why your engineering roadmap should prioritize RAG first."
-},
-{
-"title": "The Future Belongs to Developers Who Own Something",
-"slug": "future-belongs-to-developers-who-own-something",
-"excerpt": "As skills become commoditized by AI, technical leverage shifts away from what you can build toward what you actually own."
-}
-
+    "slug": "who-owns-african-data-infrastructure-risk",
+    "title": "Who Owns African Data? The Hidden Risk in Every AI Tool",
+    "excerpt": "A deep dive into data residency, the CLOUD Act, and why national data ownership is a strategic infrastructure issue, not a political argument.",
+    "date": "2026-04-20",
+    "category": "ai infrastructure",
+    "readTime": "6 min read"
+  },
+  {
+    "slug": "engineering-ai-constrained-environments",
+    "title": "Building AI That Works During Load Shedding",
+    "excerpt": "Beyond local tools: How to architect resilient, low-cost, and independent AI pipelines optimized for real-world infrastructure constraints.",
+    "date": "2026-04-28",
+    "category": "edge engineering",
+    "readTime": "8 min read"
+  },
+  {
+    "slug": "why-businesses-dont-need-custom-ai",
+    "title": "Why Most Businesses Don't Need a Custom AI Model",
+    "excerpt": "Most companies have a knowledge retrieval problem, not an intelligence problem. Here is why your engineering roadmap needs RAG, not a freshly trained LLM.",
+    "date": "2026-05-05",
+    "category": "ai strategy",
+    "readTime": "5 min read"
+  },
+  {
+    "slug": "why-ai-understands-shakespeare-better-than-shona",
+    "title": "Why AI Understands Shakespeare Better Than Shona",
+    "excerpt": "An economic and architectural analysis of training data scarcity, token representation, and the market realities shaping modern LLM capabilities.",
+    "date": "2026-05-14",
+    "category": "data engineering",
+    "readTime": "7 min read"
+  },
+  {
+    "slug": "africas-most-valuable-resource-is-data",
+    "title": "Africa's Most Valuable Resource Isn't Lithium. It's Data.",
+    "excerpt": "Why data must be treated as critical national infrastructure, exploring localized data scarcity, synthetic generation pipelines, and long-term competitive advantages.",
+    "date": "2026-05-22",
+    "category": "ai infrastructure",
+    "readTime": "6 min read"
+  },
+  {
+    "slug": "before-you-fine-tune-a-model",
+    "title": "Before You Fine-Tune a Model, Read This",
+    "excerpt": "Busting the myths around model customization. A realistic look at cost, complexity, and why you should almost always build a robust retrieval layer first.",
+    "date": "2026-06-01",
+    "category": "ai strategy",
+    "readTime": "6 min read"
+  },
+  {
+    "slug": "future-belongs-to-developers-who-own-something",
+    "title": "The Future Belongs to Developers Who Own Something",
+    "excerpt": "As raw coding skills become commoditized by AI, technical and professional leverage shifts away from what you can build toward the assets you actually own.",
+    "date": "2026-06-10",
+    "category": "career development",
+    "readTime": "5 min read"
+  }
 ]

@@ -70,5 +70,41 @@
     "date": "2026-04-05",
     "category": "cloud edu",
     "readTime": "10 min read"
-  }
+  },
+  {
+"title": "Who Owns African Data? The Hidden Risk in Every AI Tool",
+"slug": "who-owns-african-data-infrastructure-risk",
+"excerpt": "A deep dive into data residency, the CLOUD Act, and why national data ownership is a strategic infrastructure issue"
+},
+{
+"title": "Building AI That Works During Load Shedding",
+"slug": "engineering-ai-constrained-environments",
+"excerpt": "Beyond the tools: How to architect resilient, low-cost, and independent AI pipelines optimized for real-world infrastructure constraints."
+},
+{
+"title": "Why Most Businesses Don't Need a Custom AI Model",
+"slug": "why-businesses-dont-need-custom-ai",
+"excerpt": "Most companies have a knowledge retrieval problem, not an intelligence problem. Here is why you need RAG, not a freshly trained LLM."
+},
+{
+"title": "Why AI Understands Shakespeare Better Than Shona",
+"slug": "why-ai-understands-shakespeare-better-than-shona",
+"excerpt": "An economic analysis of training data scarcity, language representation, and the market realities shaping modern LLM capabilities."
+},
+{
+"title": "Africa's Most Valuable Resource Isn't Lithium. It's Data.",
+"slug": "africas-most-valuable-resource-is-data",
+"excerpt": "Why data must be treated as critical national infrastructure, exploring data scarcity, synthetic generation, and competitive advantages."
+},
+{
+"title": "Before You Fine-Tune a Model, Read This",
+"slug": "before-you-fine-tune-a-model",
+"excerpt": "Busting the myths around model customization. A realistic look at cost, complexity, and why your engineering roadmap should prioritize RAG first."
+},
+{
+"title": "The Future Belongs to Developers Who Own Something",
+"slug": "future-belongs-to-developers-who-own-something",
+"excerpt": "As skills become commoditized by AI, technical leverage shifts away from what you can build toward what you actually own."
+}
+
 ]

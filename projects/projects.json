@@ -66,6 +66,7 @@
     "slug": "weather-application",
     "title": "Weather Application",
     "excerpt": "A full-stack weather interface utilizing geolocation and public weather APIs to present immediate meteorological tracking indexes and weekly forecasts.",
+    "order": 1,
     "category": "web",
     "tags": ["JavaScript", "REST API", "Full Stack"],
     "featured": false,

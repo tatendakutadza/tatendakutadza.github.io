@@ -1,10 +1,29 @@
 [
   {
+    "slug": "weather-application",
+    "title": "Weather Application",
+    "excerpt": "A full-stack weather interface utilizing geolocation and public weather APIs to present immediate meteorological tracking indexes and weekly forecasts.",
+    "order": 1,
+    "category": "web",
+    "tags": ["JavaScript", "REST API", "Full Stack"],
+    "featured": false,
+    "status": "Completed"
+  },
+  {
     "slug": "entry-level-job-analysis",
     "title": "Entry Level Job Analysis in Zimbabwe",
     "excerpt": "A data project focused on gathering, cleaning, and analyzing job market data to understand trends, key skills, and hiring requirements for entry-level positions across Zimbabwe.",
     "category": "data",
     "tags": ["Python", "Pandas", "Data Analysis"],
+    "featured": true,
+    "status": "Completed"
+  },
+  {
+    "slug": "personal-portfolio-website",
+    "title": "Personal Portfolio Website",
+    "excerpt": "The very site you are exploring right now. A high-performance, responsive personal website configured from scratch with plain web technologies, smooth navigation matrices, and light/dark configurations.",
+    "category": "web",
+    "tags": ["HTML5", "CSS3", "Vanilla JS"],
     "featured": true,
     "status": "Completed"
   },
@@ -36,15 +55,6 @@
     "status": "Completed"
   },
   {
-    "slug": "personal-portfolio-website",
-    "title": "Personal Portfolio Website",
-    "excerpt": "The very site you are exploring right now. A high-performance, responsive personal website configured from scratch with plain web technologies, smooth navigation matrices, and light/dark configurations.",
-    "category": "web",
-    "tags": ["HTML5", "CSS3", "Vanilla JS"],
-    "featured": true,
-    "status": "Completed"
-  },
-  {
     "slug": "ai-portfolio-integration",
     "title": "Integrating AI into My Portfolio Website",
     "excerpt": "An embedded artificial intelligence assistant planned for this portfolio site to deliver instant article summaries, handle automated contact forms, and guide visitors.",
@@ -60,16 +70,6 @@
     "category": "ai",
     "tags": ["Webhooks", "APIs", "AI Chatbots"],
     "featured": true,
-    "status": "Completed"
-  },
-  {
-    "slug": "weather-application",
-    "title": "Weather Application",
-    "excerpt": "A full-stack weather interface utilizing geolocation and public weather APIs to present immediate meteorological tracking indexes and weekly forecasts.",
-    "order": 1,
-    "category": "web",
-    "tags": ["JavaScript", "REST API", "Full Stack"],
-    "featured": false,
     "status": "Completed"
   },
   {

@@ -1,0 +1,56 @@
+<h1>SkyPulse — Full-Stack Weather Application</h1>
+
+<div class="project-metadata-strip" style="display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 1rem 0 2.5rem 0; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); font-family: var(--font-mono); font-size: 0.85rem; color: var(--muted);">
+  <div><i class="fa-regular fa-calendar" style="color: var(--accent);"></i> <strong>Status:</strong> Completed</div>
+  <div><i class="fa-regular fa-folder" style="color: var(--accent);"></i> <strong>Category:</strong> Web Application</div>
+  <div><i class="fa-solid fa-code-branch" style="color: var(--accent);"></i> <strong>Scope:</strong> Full-Stack REST Integration</div>
+</div>
+
+<p class="project-lead" style="font-size: 1.2rem; line-height: 1.8; color: var(--text); margin-bottom: 2rem; font-weight: 400;">
+  A full-stack weather interface utilizing geolocation and public weather APIs to present immediate meteorological tracking indexes and weekly forecasts.
+</p>
+
+<div class="project-action-buttons" style="display: flex; flex-wrap: wrap; gap: 1rem; margin-bottom: 3.5rem;">
+  <a href="https://github.com/tatendakutadza/skypulse.git" target="_blank" class="action-btn-link" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; background: var(--surface2); border: 1px solid var(--border); color: var(--text); padding: 10px 20px; border-radius: 8px; transition: all 0.2s ease;">
+    <i class="fa-brands fa-github" style="font-size: 1.1rem;"></i> View Source Code
+  </a>
+  <a href="https://skypulse-iota.vercel.app/" target="_blank" class="action-btn-link production-primary" style="display: inline-flex; align-items: center; gap: 8px; font-family: var(--font-mono); font-size: 0.85rem; font-weight: 700; text-transform: uppercase; background: var(--accent); border: 1px solid var(--accent); color: #0a0e1a; padding: 10px 20px; border-radius: 8px; transition: all 0.2s ease;">
+    <i class="fa-solid fa-cloud-sun" style="font-size: 1rem;"></i> View Live Demo
+  </a>
+</div>
+
+<h2>Project Overview & Objectives</h2>
+<p>
+  Most weather apps either bury useful data behind ads or overwhelm the user with more numbers than they need. The objective behind SkyPulse was to build a clean, fast interface that surfaces exactly what matters — current conditions, an hourly outlook, and a 7-day forecast — while handling the real-world unpredictability of geolocation permissions, API rate limits, and inconsistent network conditions gracefully.
+</p>
+<p>
+  The build was structured around three architectural priorities: a responsive frontend that feels instant even on slower connections, a backend layer that protects API keys and normalizes inconsistent data formats, and a UI that communicates atmospheric data visually rather than as a wall of text.
+</p>
+
+<h2>The Technical Pipeline</h2>
+<p>
+  SkyPulse runs on a full-stack architecture split across three operational layers:
+</p>
+<ul style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text2);">
+  <li><strong>Geolocation Handling:</strong> On load, the app requests the user's coordinates via the browser's Geolocation API, with a manual city-search fallback for users who decline location access or are searching for a different city entirely.</li>
+  <li><strong>REST API Integration:</strong> Coordinates are passed to a public weather API, which returns raw meteorological data — temperature, humidity, wind speed, precipitation probability, and multi-day forecasts — that the backend normalizes into a consistent response shape for the frontend to consume.</li>
+  <li><strong>Dynamic Rendering:</strong> The frontend parses the normalized payload and renders current conditions, an hourly breakdown, and a 7-day forecast, with conditional UI states (loading, error, empty) handled explicitly rather than left to silently fail.</li>
+</ul>
+
+<h2>Key Engineering Decisions</h2>
+<p>
+  A few decisions shaped how the app behaves under real-world conditions rather than just the happy path:
+</p>
+<ol style="margin-left: 1.5rem; margin-bottom: 1.5rem; color: var(--text2);">
+  <li><strong>Graceful Geolocation Fallback:</strong> Rather than treating denied location permissions as an error state, SkyPulse transitions smoothly into a manual search flow — the app stays useful instead of stalling on a permissions prompt.</li>
+  <li><strong>API Key Protection:</strong> Weather API requests are routed through a backend layer rather than called directly from the browser, keeping API credentials off the client and avoiding key exposure in network requests.</li>
+  <li><strong>Unit & Data Normalization:</strong> Temperature units, time zones, and forecast intervals are normalized server-side before reaching the frontend, so the UI layer never has to guess at formatting or handle inconsistent API response shapes.</li>
+</ol>
+
+<h2>Technologies Deployed</h2>
+<div class="tech-used-cloud" style="display: flex; flex-wrap: wrap; gap: 8px; margin: 1.5rem 0 3rem 0;">
+  <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 4px 12px; background: rgba(56,189,248,0.06); border: 1px solid var(--border); border-radius: 6px; color: var(--accent);">JavaScript</span>
+  <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 4px 12px; background: rgba(56,189,248,0.06); border: 1px solid var(--border); border-radius: 6px; color: var(--accent);">REST API</span>
+  <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 4px 12px; background: rgba(56,189,248,0.06); border: 1px solid var(--border); border-radius: 6px; color: var(--accent);">Geolocation API</span>
+  <span style="font-family: var(--font-mono); font-size: 0.75rem; text-transform: uppercase; padding: 4px 12px; background: rgba(56,189,248,0.06); border: 1px solid var(--border); border-radius: 6px; color: var(--accent);">Vercel</span>
+</div>

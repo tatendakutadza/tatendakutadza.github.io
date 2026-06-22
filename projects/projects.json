@@ -6,7 +6,7 @@
     "order": 1,
     "category": "web",
     "tags": ["JavaScript", "REST API", "Full Stack"],
-    "featured": false,
+    "featured": true,
     "status": "Completed"
   },
   {
